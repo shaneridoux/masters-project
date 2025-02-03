@@ -1,0 +1,279 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[round,sort]{natbib}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref, fullpage, setspace}
+%\usepackage{listings}
+
+%\usepackage{easylist}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{linkcolor = true, citecolor=black,pdfstartview=FitH, pdfpagemode=None, colorlinks = true, linkcolor = black, pdftitle = {Shane_Ridoux_Senior_Capstone}}
+\usepackage{eucal}
+\usepackage{sectsty}
+\usepackage{subeqnarray}
+ \usepackage[utf8]{inputenc}
+\usepackage{graphicx,psfrag} %only include if using pictures
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{ifthen} %only include if using conditional package
+\usepackage{sectsty}
+\usepackage{subfig}
+\usepackage{float}
+\newcommand{\B}{\bf}
+\newtheorem{thm}{Theorem}
+
+\newtheorem{defn}[thm]{Definition}
+
+\newtheorem{lemma}[thm]{Lemma}
+
+\newtheorem{claim}[thm]{Claim}
+
+
+\newtheorem{proposition}[thm]{Proposition}
+
+\newtheorem{conjecture}[thm]{Conjecture}
+
+\newtheorem{corollary}[thm]{Corollary}
+
+\newtheorem{remark}[thm]{Remark}
+\newcommand{\hhs}[1]{\hspace{#1mm}}
+\newcommand{\hs}{\hspace{5mm}}
+\newcommand{\vp}{\vspace{1mm}}
+\newcommand{\vs}{\vspace{5mm}}
+\newcommand{\jl}{$\frac{}{}$} %User defined for empty symbol to jump line
+% ********************** newcommand *********************************
+\newcommand{\mbf}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\hb}[1]{\hspace{-#1 mm}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\QED}{\hfill $\Box$}
+% *********************** frequently used math symbols from AMS *******
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\renewcommand{\arraystretch}{1.5}
+\newcommand{\n}{\nabla}
+\newcommand{\Hv}{\mathcal{H}_v}
+\newcommand{\h}{\mathcal{H}}
+\newcommand{\Ov}{\mathcal{O}_v}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Cn}{\mathbb{C}^n}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\p}{\partial}
+\newcommand{\ep}{\epsilon}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\finv}{f^{-1}}
+\newcommand{\im}{\imath}
+\newcommand{\ga}{\gamma}
+\newcommand{\fee}{\varphi}
+\newcommand{\noi}{\noindent}
+\newcommand{\bO}{\Omega}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\Oint}{\int_{\bO}}
+\newcommand{\OXint}{\int_{\bO\times\bX}}
+\newcommand{\Aint}{\int_{\bA}}
+\newcommand{\Xint}{\int_{\mathbb{X}}}
+\newcommand{\XXint}{\int_{\mathbb{X}^2}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\pa}{\partial}
+\newcommand{\tab}{\hspace*{2em}}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+%\numberwithin{equation}{section}
+\evensidemargin 0.125 in \oddsidemargin 0.125 in
+\setlength{\oddsidemargin}{0.125in}
+\setlength{\evensidemargin}{0.125in}
+\setlength{\textwidth}{6.25in} \setlength{\topmargin}{-0.51in}
+\setlength{\textheight}{9in}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\usepackage{Sweave}
+\begin{document}
+
+\title{\bf A Bayesian Discovery of Complement Epistasis in the Natural History of Type 1 Diabetes
+\vspace{2.5cm}\\
+\begin{figure}[h!]
+\centering \includegraphics[width=5.0in]{/Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf}
+\end{figure}
+}
+\author{{\bf \huge Shane Ridoux} \\
+Advised by Drs. Randi K. Johnson, Joshua P. French \& Erin E. Austin\\
+University of Colorado-Denver}
+
+\date{\today} 
+
+
+
+ \linespread{2}
+
+ \maketitle
+\newpage
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\input{Masters-Thesis-concordance}
+\doublespacing
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Background}
+Type 1 Diabetes (T1D) is an autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels. Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
+
+\includegraphics{/Users/shane/School/CU-Denver/24-Fall/Research-Methods/rising-incidence-t1d.png}{\\ \tiny Figure 1: Incidence of T1D}  
+
+\par
+Type 1 Diabetes is strongly influenced by genetic factors, with nearly 40\% of the risk attributed to the highly polymorphic Major Histocompatibility Complex (MHC), which is associated with various diseases. This region includes genes encoding components of the complement system which acts as a rapid and targeted innate immune defense mechanism against pathogens, primarily through promoting inflammation and modulating the adaptive immune response. However, the efficiency and regulation of complement activity varies among individuals largely due to inherited genetic differences.
+
+\subsection{Motivation}
+While genetic polymorphisms within the complement system significantly affect its activity and regulation, their role in immune activation and T1D progression remains underexplored due to the oversight of epistatic interactions. Genetic epistasis is most commonly understood as gene interaction where the contribution of one gene on the phenotypic outcome is dependent on genetic background (citation). The complotype is the total inherited set of genetic variants in complement genes (citation) and can be thought of as the genetic background for the complement system. 
+\par
+The complotype impacts the activation potential of the complement and immune system where an overactive complement system influences susceptibility to inflammation and autoimmune disease while an underactive complement system results in increased risk for infection. While individual polymorphisms within the complotype have a minor impact on activation potential, their aggregate effect is believed to be greatly amplified either synergistically or antagonistically (citation?). Polymorphisms in complement genes have been shown to be associated with type 1 diabetes however, epistasis in complement genes has yet to be studied in type 1 diabetes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Literature review}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% \section{Research Question}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Does Complement Variation Effect or Jointly Effect Risk in the Natural History of T1D?
+% To identify combinatorial allelic variations associated with the initiation of islet autoimmunity (IA), progression from IA to T1D, and the onset of T1D in the Diabetes Autoimmunity Study in the Young (DAISY).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bayesian Motivation (Moti-Bayesian)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A Genome-Wide Association Study (GWAS) tests millions of representative single nucleotide polymorphisms (SNPs) from a population in a linear framework where each SNP is tested for association with a phenotype individually (citation). Testing interactions among these SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. A typical approach adjusting for multiple hypotheses in a GWAS would be to use Bonferoni correction for the determined number of independent SNPs in a genome with the standard significance threshold being set at $5\times 10^{-8}$. 
+\par 
+There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the p-value. Additionally, its foundation on the number of independent SNPs in a European reference population neglects the genetic diversity across populations and the influence of genetic context. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence. Applying the threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes. Bayesian methods have been applied to address false positives in GWAS especially in the context of epistasis.
+
+\subsection{Data Preparation}
+Talk about imputation and DAISY Cohort and potentially TEDDY Cohort
+\subsection{Epistasis Detection}
+Talk about method generally
+\subsubsection{Computing Entropy-Based SNP Synergies}
+The concept of bivariate synergism quantifies the combined effect of two SNPs ($A$ and $B$) on a disease ($D$) beyond their individual contributions using information theory. It is calculated as:\\
+$Syn(A; B; D) = I(A, B; D) -[I(A; D) + I(B; D)]$\\
+where $Syn(A; B; D)$ compares the joint contribution of SNPs $A$ and $B$ to the disease $D$ with the additive contributions of the individual SNPs. The information gain I(A; D) about the disease $D$ due to knowledge about SNP $A$ and is defined as:\\
+$I(A; D) = H(D) - H(D|A) $\\
+$I(A, B; D) = H(D) - H(D|A, B)$ \\ where $H(\cdot)$ is the entropy. \\
+$H(D) = \sum_d p(d)log(\frac{1}{p(d)})$\\
+$H(D|A) = \sum_{a,d} p(a,d)log(\frac{1}{p(d|a)})$\\ where $p(d)$ is the probability of having disease $D=d$ and $p(d|a)$ is the probability of having disease $D=d$ given SNP $A$ has genotype $a$.
+A Network results from the bivariate synergy calculations of each SNP where the edge of nodes $A$ and $B$ has weight $Syn(A; B; D)$.
+\subsubsection{Diffusion Kernels}
+Why diffusion kernels?
+\subsubsection{Bayesian Interaction Modeling}
+\subsection{Network Interpretation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\subsection{Procedures used}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% \subsection{Data processing and analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Plots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Limitations and challenges}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Conclusion and possible extensions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ \begin{thebibliography}{99}
+
+\item citation
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{R-codes:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\end{document}
+
