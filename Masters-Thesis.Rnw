@@ -223,6 +223,24 @@ Detecting gene-gene interactions
 \item genes and gene-gene interactions are selected on Posterior Inclusion Probability (PIP)
 \end{itemize}
 
+Let $p$ be the number of genes, $k$ be a number sufficiently large $\ni$ all exposures are captured in the model, and $X_{ij_1}$ be the first kernel PCA for gene $j_1$ as gene explanatory variable for individual $i$.\\
+
+Assume:\\
+\begin{equation}
+Y_i \sim N(f(X_i, \sigma^2)) \tag{1.1}
+\end{equation}
+
+\begin{equation}
+f(X_i) = \sum_{k=1}^p f^{(h)}(X_i) \tag{1.2}
+\end{equation}
+
+\begin{equation}
+f^{(h)}(X_i) = \sum_{j_1 =1}^p \tilde{X}_{ij_1}\beta_{j_1}^{(h)} + \sum_{j_1 = 2}^p \sum_{j_2 \le j_1} \tilde{X}_{ij_1j_2}\beta_{j_1j_2}^{(h)} \tag{1.3}
+\end{equation}
+
+\begin{equation}
+\tilde{X}_{j_1} = g_1(X_{j_1}), \quad \text{where } g_1(\cdot) \text{ is the natural spline basis function} \tag{1.4}
+\end{equation}
 \subsection{Network Interpretation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

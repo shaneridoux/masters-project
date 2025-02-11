@@ -214,8 +214,34 @@ $H(D) = \sum_d p(d)log(\frac{1}{p(d)})$\\
 $H(D|A) = \sum_{a,d} p(a,d)log(\frac{1}{p(d|a)})$\\ where $p(d)$ is the probability of having disease $D=d$ and $p(d|a)$ is the probability of having disease $D=d$ given SNP $A$ has genotype $a$.
 A Network results from the bivariate synergy calculations of each SNP where the edge of nodes $A$ and $B$ has weight $Syn(A; B; D)$.
 \subsubsection{Diffusion Kernels}
-Why diffusion kernels?
+Why diffusion kernels? Essentially allow for gene summaries that become the explanatory variable in the Bayesian model...
 \subsubsection{Bayesian Interaction Modeling}
+Detecting gene-gene interactions
+\begin{itemize}
+\item one continuous variable per gene
+\item Bayesian semi-parametric regression approach to infer non-linear gene-gene interaction
+\item As gene explanatory variables for individual $i$, used first kernel PCA $X_{ij_1}$ for each gene $j_1$
+\item genes and gene-gene interactions are selected on Posterior Inclusion Probability (PIP)
+\end{itemize}
+
+Let $p$ be the number of genes, $k$ be a number sufficiently large $\ni$ all exposures are captured in the model, and $X_{ij_1}$ be the first kernel PCA for gene $j_1$ as gene explanatory variable for individual $i$.\\
+
+Assume:\\
+\begin{equation}
+Y_i \sim N(f(X_i, \sigma^2)) \tag{1.1}
+\end{equation}
+
+\begin{equation}
+f(X_i) = \sum_{k=1}^p f^{(h)}(X_i) \tag{1.2}
+\end{equation}
+
+\begin{equation}
+f^{(h)}(X_i) = \sum_{j_1 =1}^p \tilde{X}_{ij_1}\beta_{j_1}^{(h)} + \sum_{j_1 = 2}^p \sum_{j_2 \le j_1} \tilde{X}_{ij_1j_2}\beta_{j_1j_2}^{(h)} \tag{1.3}
+\end{equation}
+
+\begin{equation}
+\tilde{X}_{j_1} = g_1(X_{j_1}), \quad \text{where } g_1(\cdot) \text{ is the natural spline basis function} \tag{1.4}
+\end{equation}
 \subsection{Network Interpretation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
