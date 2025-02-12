@@ -1,0 +1,47 @@
+h1 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    text-align: center;
+    color: #CFB87C;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+h3, h2, h4 {
+    color: black;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: lightgrey;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    z-index: 2;
+    color: black;
+    background-color: #CFB87C;
+    border-color: #CFB87C;
+}
+
+#TOC {
+    background: url("images/CU-Logo2.png");
+    background-size: contain;
+    padding-top: 80px !important;
+    background-repeat: no-repeat;
+}
+
+.nav-pills>li>a {
+    color: black;
+}
+
+.nav-pills>li>a:hover,
+.nav-pills>li>a:focus,
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus {
+    link-color: black;
+    color: black;
+    background-color: #CFB87C;
+    border-color: #CFB87C;
+}
