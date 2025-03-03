@@ -32,6 +32,10 @@ library(minet)
 # source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/entropy.R")
 source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/information-gain.R")
 source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/textme.R")
+
+# load api
+api <- read.table("/Users/shane/School/CU-Denver/Masters-Project/masters-project/api.txt")
+
 # load genotype/pheno data
 genotype <- fread("/Users/shane/School/CU-Denver/Masters-Project/genotype-matrix-hg19.raw")
 genotype <- as.data.frame(genotype) # gets rid of data.table class
@@ -93,7 +97,7 @@ for(gene in names(gene_snps_filtered)){
   results[[gene]] <- do.call(rbind, syn_results)
 }
 bisyn <- bind_rows(results, .id = "Gene")
-textme(api = "2e4912543450e96b3188930cbc71f773",
+textme(api = api$V1,
        project = "masters",
        channel = "within-gene",
        event = "Synergy Calculation",

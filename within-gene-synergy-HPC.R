@@ -31,6 +31,16 @@ setwd("/scratch/alpine/sridoux@xsede.org/ms-proj")
 # source handmade functions
 source("information-gain.R")
 source("textme.R")
+
+# catch variables
+args <- commandArgs(trailingOnly = TRUE)
+# Get arguments
+chunk_size <- args[1] # 10,000 genes
+chunk_num <- args[2] # a number 1-4
+
+# load api
+api <- read.table("/Users/shane/School/CU-Denver/Masters-Project/masters-project/api.txt")
+
 # load genotype/pheno data
 genotype <- fread("genotype-matrix-hg19.raw")
 genotype <- as.data.frame(genotype) # gets rid of data.table class
@@ -93,7 +103,7 @@ for(gene in names(gene_snps_filtered)){
   results[[gene]] <- do.call(rbind, syn_results)
 }
 bisyn <- bind_rows(results, .id = "Gene")
-textme(api = "2e4912543450e96b3188930cbc71f773",
+textme(api = api$V1,
        project = "masters",
        channel = "within-gene",
        event = "Synergy Calculation",
@@ -231,7 +241,7 @@ network_df <- purrr::map_dfr(network_results, function(x) {
   
   return(df)
 })
-textme(api = "2e4912543450e96b3188930cbc71f773",
+textme(api = api$V1,
        project = "masters",
        channel = "within-gene",
        event = "Network Building",
@@ -286,7 +296,7 @@ for (i in seq_along(network_results)) {
     write.csv(L_matrix, file_path, row.names = TRUE)
   }
 }
-textme(api = "2e4912543450e96b3188930cbc71f773",
+textme(api = api$V1,
        project = "masters",
        channel = "within-gene",
        event = "Laplacian Construction",
