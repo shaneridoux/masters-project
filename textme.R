@@ -19,4 +19,4 @@ params = paste0("{
 res <- postForm("https://api.logsnag.com/v1/log", .opts=list(postfields = params, httpheader = headers, followlocation = TRUE), style = "httppost")
 cat(res)
 }
-# textme(api = "a74417411cf1cb3145ee97bc673ea190", project = "test", channel = "crawler", event = "Test Text Me", description = "This is a test for the textme function.")
+# textme(api = "", project = "test", channel = "crawler", event = "Test Text Me", description = "This is a test for the textme function.")
