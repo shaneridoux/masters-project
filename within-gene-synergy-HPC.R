@@ -1,6 +1,6 @@
 # Shane Ridoux
 # 250210
-# Within Gene Synergy
+# Within Gene Synergy for HPC
 
 # This script makes the within-gene synergy graphs and saves the Laplacians for 
 # downstream analysis (kPCA and then bayesian interaction)
@@ -27,13 +27,12 @@ library(progress)
 library(doParallel)
 # BiocManager::install("minet")
 library(minet)
-
+setwd("/scratch/alpine/sridoux@xsede.org/ms-proj")
 # source handmade functions
-# source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/entropy.R")
-source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/information-gain.R")
-source("/Users/shane/School/CU-Denver/Masters-Project/masters-project/textme.R")
+source("information-gain.R")
+source("textme.R")
 # load genotype/pheno data
-genotype <- fread("/Users/shane/School/CU-Denver/Masters-Project/genotype-matrix-hg19.raw")
+genotype <- fread("genotype-matrix-hg19.raw")
 genotype <- as.data.frame(genotype) # gets rid of data.table class
 row.names(genotype) <- genotype$IID
 
@@ -41,7 +40,7 @@ row.names(genotype) <- genotype$IID
 colnames(genotype) <- sub("_[^_]+$", "", colnames(genotype))
 
 # import annotation file
-anno <- as.data.frame(fread("/Users/shane/School/CU-Denver/Masters-Project/anno_file.tsv"))
+anno <- as.data.frame(fread("anno_file.tsv"))
 # anno <- anno[which(anno$exonic_func != "."),] # remove "." (NAs) from exonic function
 
 # double check colnames are in topmed column from anno
@@ -63,8 +62,9 @@ gene_snps_filtered <- gene_snps[sapply(gene_snps, length) > 1]
 
 results <- list()  # Store results for each gene
 H_D <- entropy(genotype["PHENOTYPE"], method = "emp")
+log_file <- "syn_progress_log.txt" # make log file for keeping track of progress
 for(gene in names(gene_snps_filtered)){
-  cat("Processing:", gene, "\n")
+  write(paste(Sys.time(), "- Processing:", gene), file = log_file, append = TRUE)
   snps_sub <- gene_snps_filtered[[gene]]
   combos <- combn(snps_sub, 2) # SNP A - SNP B
   self <- matrix(sort(rep(snps_sub, 2)), 2) # SNP A - SNP A
@@ -98,7 +98,7 @@ textme(api = "2e4912543450e96b3188930cbc71f773",
        channel = "within-gene",
        event = "Synergy Calculation",
        description = "Bivariate synergies have been calculated for all 35898 genes!"
-       )
+)
 
 
 
@@ -115,7 +115,7 @@ gene_network <- function(gene, bisyn, output_dir){
   LD<-myMat
   diag(LD) = 0 #make diagonal zero i.e no info between the same snp
   print(LD)
-
+  
   ## Make the Diffusion Laplacian matrix
   #LD<-myMat 
   D<-diag(rowSums(LD))
@@ -128,7 +128,7 @@ gene_network <- function(gene, bisyn, output_dir){
   density<-mean_dist<-transitivity<-edge_dens<-vertex_con<-edge_con<-NULL
   
   ## select meaningfull edges using minet pkg and summarise graph
-
+  
   #--------------------------------------------------------------------------
   # mrnet: Maximum Relevance Minimum Redundancy
   graph_mrnet = mrnet(LD)
@@ -137,7 +137,7 @@ gene_network <- function(gene, bisyn, output_dir){
                                                diag = FALSE)
   #remove loops
   datgraph_mrnet = simplify(datgraph_mrnet, remove.multiple=TRUE, remove.loops=TRUE)
-
+  
   # -----------------------------   summaries of interest
   density = edge_density(datgraph_mrnet,loop=FALSE)  #Density
   
@@ -149,22 +149,22 @@ gene_network <- function(gene, bisyn, output_dir){
   
   vertex_con = vertex_connectivity(datgraph_mrnet) #number of edges/no.of posible edges
   edge_con = edge_connectivity(datgraph_mrnet) #number of edges/no.of posible edges
-
+  
   snpbetw_centr = betweenness(datgraph_mrnet, directed=F, weights=NA)
   snpbetw_centr = data.frame(snpbetw_centr)
-
+  
   snpsbetw_centrDF <- tibble::rownames_to_column(snpbetw_centr, "SNP")
-
-
+  
+  
   graphxx = data.frame(gene,density,mean_dist,transitivity,edge_dens,vertex_con,edge_con)
   graphxx = setNames(graphxx, c("gene", "density", "mean_dist", "transitivity", "edge_dens", "vertex_con", "edge_con"))
-
-    # Set node size by degree centrality
+  
+  # Set node size by degree centrality
   node_size <- degree(datgraph_mrnet, mode = "all")
   
   # Create a layout
   graph_layout <- layout_with_fr(datgraph_mrnet)  # Force-directed layout
-
+  
   # Get node names from the graph
   node_names <- V(datgraph_mrnet)$name
   
@@ -205,14 +205,14 @@ handlers("txtprogressbar")  # Uses a text-based progress bar
 gene_list <- names(results)
 
 # Number of cores to use
-num_cores <- detectCores() - 1  
+num_cores <- as.numeric(Sys.getenv("SLURM_CPUS_ON_NODE", unset = detectCores() - 1))
 
 # Run parallel processing
 network_results <- mclapply(gene_list, function(g) {
   cat("Processing:", g, "\n")  # Keep log messages for tracking progress
   
   gene_network(gene = g, bisyn = bisyn, 
-               output_dir = "/Users/shane/School/CU-Denver/Masters-Project/within-gene-syn-graphs")
+               output_dir = "within-gene-syn-graphs")
 }, mc.cores = num_cores)
 
 # Combine graphxx and snpsbetw_centrDF into a single data frame
@@ -231,7 +231,12 @@ network_df <- purrr::map_dfr(network_results, function(x) {
   
   return(df)
 })
-
+textme(api = "2e4912543450e96b3188930cbc71f773",
+       project = "masters",
+       channel = "within-gene",
+       event = "Network Building",
+       description = "Networks have been created for all 35898 genes!"
+)
 # Check the structure of the new combined data frame
 str(network_df)
 
@@ -242,7 +247,7 @@ head(network_df)
 net.summary <- unique(network_df[,-c(1,2)])
 str(net.summary)
 write.table(net.summary,
-            file = "/Users/shane/School/CU-Denver/Masters-Project/within-gene-syn-res/network_summary.tsv",
+            file = "within-gene-syn-res/network_summary.tsv",
             sep = "\t",
             col.names = TRUE,
             row.names = FALSE,
@@ -254,7 +259,7 @@ net.betwn <- data.frame("gene"=network_df$gene,
                         "betwn"=network_df$snpbetw_centr)
 str(net.betwn)
 write.table(net.betwn,
-            file = "/Users/shane/School/CU-Denver/Masters-Project/within-gene-syn-res/network_betweeness.tsv",
+            file = "within-gene-syn-res/network_betweeness.tsv",
             sep = "\t",
             col.names = TRUE,
             row.names = FALSE,
@@ -262,7 +267,7 @@ write.table(net.betwn,
 
 
 # Define directory to save L matrices
-output_dir <- "/Users/shane/School/CU-Denver/Masters-Project/within-gene-syn-res/Laplacians"
+output_dir <- "within-gene-syn-res/Laplacians"
 
 # Loop through each element in network_results
 for (i in seq_along(network_results)) {
@@ -281,3 +286,17 @@ for (i in seq_along(network_results)) {
     write.csv(L_matrix, file_path, row.names = TRUE)
   }
 }
+textme(api = "2e4912543450e96b3188930cbc71f773",
+       project = "masters",
+       channel = "within-gene",
+       event = "Laplacian Construction",
+       description = "Lacplacians have been saved for all 35898 genes!"
+)
+
+
+write.table(bisyn,
+            file = "within-gene-syn-res/bisyn.tsv",
+            sep = "\t",
+            quote = F,
+            row.names = F,
+            col.names = T)
