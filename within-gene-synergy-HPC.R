@@ -28,18 +28,20 @@ library(doParallel)
 # BiocManager::install("minet")
 library(minet)
 setwd("/scratch/alpine/sridoux@xsede.org/ms-proj")
+# setwd("/Users/shane/School/CU-Denver/Masters-Project/masters-project")
 # source handmade functions
 source("information-gain.R")
 source("textme.R")
 
 # catch variables
 args <- commandArgs(trailingOnly = TRUE)
+
 # Get arguments
-chunk_size <- args[1] # 10,000 genes
-chunk_num <- args[2] # a number 1-4
+chunk_size <- as.numeric(args[1]) # 10,000 genes
+chunk_num <- as.numeric(args[2]) # a number 1-4
 
 # load api
-api <- read.table("/Users/shane/School/CU-Denver/Masters-Project/masters-project/api.txt")
+api <- read.table("api.txt")
 
 # load genotype/pheno data
 genotype <- fread("genotype-matrix-hg19.raw")
@@ -70,28 +72,45 @@ sapply(gene_snps, length)  # SNP count per gene
 # filter to genes with more than one snp
 gene_snps_filtered <- gene_snps[sapply(gene_snps, length) > 1]
 
+# filter gene list by chunk
+start <- 1 + (chunk_size * (chunk_num - 1))
+stop <- min(chunk_size * chunk_num, length(gene_snps_filtered))
+
+gene_snp_chunk <- gene_snps_filtered[start:stop]
+
 results <- list()  # Store results for each gene
 H_D <- entropy(genotype["PHENOTYPE"], method = "emp")
-log_file <- "syn_progress_log.txt" # make log file for keeping track of progress
-for(gene in names(gene_snps_filtered)){
+
+# Detect available cores for parallel processing
+num_cores <- 10
+cl <- makeCluster(num_cores)
+registerDoParallel(cl)
+
+# Log file for tracking progress
+log_file <- "synergy_progress_log.txt"
+
+# Run parallel processing with foreach
+results <- foreach(gene = names(gene_snp_chunk), .packages = c("dplyr", "infotheo"), .combine = bind_rows) %dopar% {
+  # Log progress
   write(paste(Sys.time(), "- Processing:", gene), file = log_file, append = TRUE)
-  snps_sub <- gene_snps_filtered[[gene]]
-  combos <- combn(snps_sub, 2) # SNP A - SNP B
-  self <- matrix(sort(rep(snps_sub, 2)), 2) # SNP A - SNP A
-  pairs <- matrix(c(combos, self), 2)  # Merge both types of pairs
+  
+  # Extract SNPs for the current gene
+  snps_sub <- gene_snp_chunk[[gene]]
+  
+  # Generate SNP-SNP combinations
+  combos <- combn(snps_sub, 2)  # SNP1 - SNP2 pairs
+  self <- matrix(sort(rep(snps_sub, 2)), 2)  # SNP1 - SNP1 pairs
+  pairs <- cbind(combos, self)  # Merge both types of pairs
   num_pairs <- ncol(pairs)
   
-  # Preallocate vectors for performance (avoid slow concatenation)
-  SNP1 <- character(num_pairs)
-  SNP2 <- character(num_pairs)
-  syn <- numeric(num_pairs)
-  
+  # Compute synergy for each SNP pair using a nested foreach loop
   syn_results <- lapply(seq_len(ncol(pairs)), function(i) {
     snp_pair <- pairs[, i]  # Extract SNP pair
     syn_value <- synergy(X = genotype, pheno = "PHENOTYPE", snps = snp_pair, entropy = H_D)
     
     # Return a data frame with SNP names and synergy value
     data.frame(
+      Gene = gene,
       SNP1 = snp_pair[1],
       SNP2 = snp_pair[2],
       Synergy = syn_value,
@@ -99,15 +118,49 @@ for(gene in names(gene_snps_filtered)){
     )
   })
   
-  # Combine results into a single data frame
-  results[[gene]] <- do.call(rbind, syn_results)
+  return(syn_results)
 }
-bisyn <- bind_rows(results, .id = "Gene")
+
+# Stop the parallel cluster
+stopCluster(cl)
+
+
+
+# for(gene in names(gene_snp_chunk)){
+#   write(paste(Sys.time(), "- Processing:", gene), file = log_file, append = TRUE)
+#   snps_sub <- gene_snp_chunk[[gene]]
+#   combos <- combn(snps_sub, 2) # SNP A - SNP B
+#   self <- matrix(sort(rep(snps_sub, 2)), 2) # SNP A - SNP A
+#   pairs <- matrix(c(combos, self), 2)  # Merge both types of pairs
+#   num_pairs <- ncol(pairs)
+#   
+#   # Preallocate vectors for performance (avoid slow concatenation)
+#   SNP1 <- character(num_pairs)
+#   SNP2 <- character(num_pairs)
+#   syn <- numeric(num_pairs)
+#   
+#   syn_results <- lapply(seq_len(ncol(pairs)), function(i) {
+#     snp_pair <- pairs[, i]  # Extract SNP pair
+#     syn_value <- synergy(X = genotype, pheno = "PHENOTYPE", snps = snp_pair, entropy = H_D)
+#     
+#     # Return a data frame with SNP names and synergy value
+#     data.frame(
+#       SNP1 = snp_pair[1],
+#       SNP2 = snp_pair[2],
+#       Synergy = syn_value,
+#       stringsAsFactors = FALSE
+#     )
+#   })
+#   
+#   # Combine results into a single data frame
+#   results[[gene]] <- do.call(rbind, syn_results)
+# }
+# bisyn <- bind_rows(results, .id = "Gene")
 textme(api = api$V1,
        project = "masters",
        channel = "within-gene",
        event = "Synergy Calculation",
-       description = "Bivariate synergies have been calculated for all 35898 genes!"
+       description = "Bivariate synergies have been calculated for batched genes!"
 )
 
 
@@ -208,20 +261,20 @@ gene_network <- function(gene, bisyn, output_dir){
 #################### Analysis for gene net and laplacian ########################
 
 # Enable progress handlers
-handlers(global = TRUE)  # Ensures progress messages appear
-handlers("txtprogressbar")  # Uses a text-based progress bar
+# handlers(global = TRUE)  # Ensures progress messages appear
+# handlers("txtprogressbar")  # Uses a text-based progress bar
 
 # Get the list of genes
-gene_list <- names(results)
+gene_list <- unique(results$Gene)
 
 # Number of cores to use
-num_cores <- as.numeric(Sys.getenv("SLURM_CPUS_ON_NODE", unset = detectCores() - 1))
+num_cores <- 10
 
 # Run parallel processing
 network_results <- mclapply(gene_list, function(g) {
   cat("Processing:", g, "\n")  # Keep log messages for tracking progress
   
-  gene_network(gene = g, bisyn = bisyn, 
+  gene_network(gene = g, bisyn = results, 
                output_dir = "within-gene-syn-graphs")
 }, mc.cores = num_cores)
 
@@ -304,8 +357,8 @@ textme(api = api$V1,
 )
 
 
-write.table(bisyn,
-            file = "within-gene-syn-res/bisyn.tsv",
+write.table(results,
+            file = "within-gene-syn-res/results.tsv",
             sep = "\t",
             quote = F,
             row.names = F,
