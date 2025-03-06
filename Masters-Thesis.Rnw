@@ -49,7 +49,7 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
-\usepackage[round,sort]{natbib}
+\usepackage[super,comma,sort&compress]{natbib}
 \usepackage{amsmath,amssymb,amsthm,amsfonts,hyperref, fullpage, setspace}
 %\usepackage{listings}
 
@@ -66,6 +66,8 @@
 \usepackage{sectsty}
 \usepackage{subfig}
 \usepackage{float}
+% \usepackage{nopageno}   % Suppresses page numbers
+
 \newcommand{\B}{\bf}
 \newtheorem{thm}{Theorem}
 
@@ -134,47 +136,125 @@
 \setlength{\textwidth}{6.25in} \setlength{\topmargin}{-0.51in}
 \setlength{\textheight}{9in}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\begin{document}
 
-\title{\bf A Bayesian Discovery of Complement Epistasis in the Natural History of Type 1 Diabetes
+
+\bibliographystyle{/Users/shane/Library/TinyTeX/texmf-dist/bibtex/bst/chicago/chicago}
+\begin{document}
+% \bibliographystyle{/Users/shane/Library/TinyTeX/texmf-dist/bibtex/bst/chicago/chicago}
+\title{\bf A Bayesian Detection of Epistasis \\ Using Summarized Synergy Networks \\ in Islet Autoimmunity
 \vspace{2.5cm}\\
 \begin{figure}[h!]
 \centering \includegraphics[width=5.0in]{/Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf}
 \end{figure}
 }
-\author{{\bf \huge Shane Ridoux} \\
+\author{{\bf \huge Shane E. Ridoux} \\
 Advised by Drs. Randi K. Johnson, Joshua P. French \& Erin E. Austin\\
 University of Colorado-Denver}
 
-\date{\today} 
+\date{April 28, 2025}
 
 
 
  \linespread{2}
 
  \maketitle
+ \thispagestyle{empty}
+
+
 \newpage
 \tableofcontents
+\thispagestyle{empty}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \SweaveOpts{concordance=TRUE}
+\pagenumbering{roman}
 \doublespacing
+\section*{Dedication}  % Unnumbered section
+\addcontentsline{toc}{section}{Dedication}  % Add to Table of Contents
+\vspace{8cm}  % Add some space before the text
+
+\begin{center}
+    \textit{To Andrew Gavin Olguin, this is for you.} \\
+    \textit{I could not have done it without you.}
+\end{center}
+
+\vspace{1cm}  % Add some space after the text
+\newpage
+
+\section*{Acknowledgements}  % Unnumbered section
+\addcontentsline{toc}{section}{Acknowledgements}  % Add to Table of Contents
+
+
+
+\noindent
+I would like to acknowledge the National Human Genome Research Institute's Pathways in Genomic Data Science Fellowship (R25HG012919) and the University of Colorado - Denver for their generous financial support of this research and my graduate education.\\
+
+\noindent
+I would like to express my gratitude to the members of the Diabetes AutoImmunity Study in the Young (DAISY) for their invaluable contribution, without which this data would not exist.\\
+
+\noindent
+I am truly grateful for the mentorship I have received from my committee members - Randi K. Johnson (Advisor), Erin E. Austin, \& Joshua P. French.\\
+
+\noindent
+I am very fortunate to have been a part of the RKJCollab. Thank you Sarah, Charlie, Kirk, and Lauren for your support, mentorship, and knowledge.\\
+
+\noindent
+Thank you to my family and friends for helping me find balance en route to finishing this thesis.\\
+
+
+\newpage
+
+\section*{Abstract}  % Unnumbered section
+\addcontentsline{toc}{section}{Abstract}  % Add to Table of Contents
+\par
+Type 1 Diabetes (T1D) is a complex autoimmune disease characterized by the erroneous destruction of islet $\beta$-cells resulting in life-long dependence on exogenous insulin. Although T1D is considered to be largely genetic, with the heritability of the disease around 80\%, roughly 20\% of the phenotypic variance is still unexplained. Epistasis, the interaction of genetic variants, is thought to contribute to this missing heritability in T1D, yet the epistatic landscape of T1D and its precursor Islet Autoimmunity (IA) remains understudied. A genome-wide analysis of the epistatic architecture of IA could inform potential biological pathways in the etiology of T1D in addition to elucidating aspects of its missing heritability. 
+\par
+After quality control, 359 DAISY children selected for nested case-control study with a customized Exome array imputed to the TOPMed r2 reference panel were included for analysis of genome-wide epistasis detection. Within-gene synergy networks were used to capture non-linear epistatic effects and summarized through diffusion kernel principal components (kPC). Between-gene epistasis was detected through a bayesian interaction analysis of kPC-summarized genes.
+\par
+RESULTS
+\par
+DISCUSSION
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsection{Background}
-Type 1 Diabetes (T1D) is an autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels. Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
+Epistasis, first coined by Bateson in 1909, has been defined and redefined and can carry with it some ambiguity in its definition. Often neglected, he also defined the term hypostasis \cite{batesonMendelsPrinciplesHeredity1909,cordellEpistasisWhatIt2002}. These two terms were initially meant to describe a hierarchical relationship where a higher factor (epistatic gene/allele) controls whether a lower factor (hypostatic gene/allele) can be expressed. Here \textit{epistatic} and \textit{hypostasis} come from the Greek prefixes \textit{epi} meaning "upon", \textit{hypo} meaning "under", and root \textit{stasis} meaning "standing". Thus, to Bateson, an epistatic gene "stands upon" a hypostatic gene, masking the hypostatic gene's expression. Epistasis, or \textit{dual epistacy}, was redefined by Fisher in 1918 for a statistical context in which there is a deviation from linearity of allelic effects in relation to some quantitative phenotype $D$ \cite{cordellEpistasisWhatIt2002,fisherXVTheCorrelationRelatives1919}. Here we already see differing definitions of epistasis just 9 years a part with differing implications. Fisherian statistical epistasis does not necessarily imply biological or functional epistasis, however, it can provide evidence for further investigation. 
+\par 
+The modern definition of epistasis is more of an umbrella term for genetic interaction. Under this umbrella, we find \textit{statistical epistasis}, which is the average epistasis measured over random genetic backgrounds at the population level, and \textit{positive/negative epistasis}, which refers to the effect of two mutations where postive (negative) epistasis implies the effect of the double mutant is greater (less) than the sum of its parts, i.e. the sum of the effects of the individual mutations \cite{johnsonEpistasisEvolutionRecent2023}.
 
-\includegraphics{/Users/shane/School/CU-Denver/24-Fall/Research-Methods/rising-incidence-t1d.png}{\\ \tiny Figure 1: Incidence of T1D}  
 
-\par
-Type 1 Diabetes is strongly influenced by genetic factors, with nearly 40\% of the risk attributed to the highly polymorphic Major Histocompatibility Complex (MHC), which is associated with various diseases. This region includes genes encoding components of the complement system which acts as a rapid and targeted innate immune defense mechanism against pathogens, primarily through promoting inflammation and modulating the adaptive immune response. However, the efficiency and regulation of complement activity varies among individuals largely due to inherited genetic differences.
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Type 1 Diabetes (T1D) is an autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels. Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
+% 
+% \includegraphics{/Users/shane/School/CU-Denver/24-Fall/Research-Methods/rising-incidence-t1d.png}{\\ \tiny Figure 1: Incidence of T1D}  
+% 
+% \par
+% Type 1 Diabetes is strongly influenced by genetic factors, with nearly 40\% of the risk attributed to the highly polymorphic Major Histocompatibility Complex (MHC), which is associated with various diseases. This region includes genes encoding components of the complement system which acts as a rapid and targeted innate immune defense mechanism against pathogens, primarily through promoting inflammation and modulating the adaptive immune response. However, the efficiency and regulation of complement activity varies among individuals largely due to inherited genetic differences.
+
+
 
 \subsection{Motivation}
-While genetic polymorphisms within the complement system significantly affect its activity and regulation, their role in immune activation and T1D progression remains underexplored due to the oversight of epistatic interactions. Genetic epistasis is most commonly understood as gene interaction where the contribution of one gene on the phenotypic outcome is dependent on genetic background (citation). The complotype is the total inherited set of genetic variants in complement genes (citation) and can be thought of as the genetic background for the complement system. 
-\par
-The complotype impacts the activation potential of the complement and immune system where an overactive complement system influences susceptibility to inflammation and autoimmune disease while an underactive complement system results in increased risk for infection. While individual polymorphisms within the complotype have a minor impact on activation potential, their aggregate effect is believed to be greatly amplified either synergistically or antagonistically (citation?). Polymorphisms in complement genes have been shown to be associated with type 1 diabetes however, epistasis in complement genes has yet to be studied in type 1 diabetes.
+% While genetic polymorphisms within the complement system significantly affect its activity and regulation, their role in immune activation and T1D progression remains underexplored due to the oversight of epistatic interactions. Genetic epistasis is most commonly understood as gene interaction where the contribution of one gene on the phenotypic outcome is dependent on genetic background (citation). The complotype is the total inherited set of genetic variants in complement genes \cite{walakiraDetectingGeneGene2022} (citation) and can be thought of as the genetic background for the complement system. 
+% \par
+% The complotype impacts the activation potential of the complement and immune system where an overactive complement system influences susceptibility to inflammation and autoimmune disease while an underactive complement system results in increased risk for infection. While individual polymorphisms within the complotype have a minor impact on activation potential, their aggregate effect is believed to be greatly amplified either synergistically or antagonistically (citation?). Polymorphisms in complement genes have been shown to be associated with type 1 diabetes however, epistasis in complement genes has yet to be studied in type 1 diabetes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
@@ -190,18 +270,20 @@ The complotype impacts the activation potential of the complement and immune sys
 % Does Complement Variation Effect or Jointly Effect Risk in the Natural History of T1D?
 % To identify combinatorial allelic variations associated with the initiation of islet autoimmunity (IA), progression from IA to T1D, and the onset of T1D in the Diabetes Autoimmunity Study in the Young (DAISY).
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
 \section{Methodology}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Bayesian Motivation (Moti-Bayesian)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-A Genome-Wide Association Study (GWAS) tests millions of representative single nucleotide polymorphisms (SNPs) from a population in a linear framework where each SNP is tested for association with a phenotype individually (citation). Testing interactions among these SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. A typical approach adjusting for multiple hypotheses in a GWAS would be to use Bonferoni correction for the determined number of independent SNPs in a genome with the standard significance threshold being set at $5\times 10^{-8}$. 
-\par 
-There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the p-value. Additionally, its foundation on the number of independent SNPs in a European reference population neglects the genetic diversity across populations and the influence of genetic context. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence. Applying the threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes. Bayesian methods have been applied to address false positives in GWAS especially in the context of epistasis.
-
+% \subsection{Bayesian Motivation}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A Genome-Wide Association Study (GWAS) tests millions of representative single nucleotide polymorphisms (SNPs) from a population in a linear framework where each SNP is tested for association with a phenotype individually (citation). Testing interactions among these SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. A typical approach adjusting for multiple hypotheses in a GWAS would be to use Bonferoni correction for the determined number of independent SNPs in a genome with the standard significance threshold being set at $5\times 10^{-8}$. 
+% \par 
+% There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the p-value. Additionally, its foundation on the number of independent SNPs in a European reference population neglects the genetic diversity across populations and the influence of genetic context. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence. Applying the threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes. Bayesian methods have been applied to address false positives in GWAS especially in the context of epistasis.
+\subsection{Overview}
 \subsection{Data Preparation}
 Talk about imputation and DAISY Cohort and potentially TEDDY Cohort
-\subsection{Epistasis Detection}
+\subsection{Within-Gene Epistasis Detection}
 Talk about method generally
 \subsubsection{Computing Entropy-Based SNP Synergies}
 The concept of bivariate synergism quantifies the combined effect of two SNPs ($A$ and $B$) on a disease ($D$) beyond their individual contributions using information theory. It is calculated as:\\
@@ -211,9 +293,12 @@ $I(A; D) = H(D) - H(D|A) $\\
 $I(A, B; D) = H(D) - H(D|A, B)$ \\ where $H(\cdot)$ is the entropy. \\
 $H(D) = \sum_d p(d)log(\frac{1}{p(d)})$\\
 $H(D|A) = \sum_{a,d} p(a,d)log(\frac{1}{p(d|a)})$\\ where $p(d)$ is the probability of having disease $D=d$ and $p(d|a)$ is the probability of having disease $D=d$ given SNP $A$ has genotype $a$.
-A Network results from the bivariate synergy calculations of each SNP where the edge of nodes $A$ and $B$ has weight $Syn(A; B; D)$.
+A Network results from the bivariate synergy calculations of each SNP where the edge of nodes $A$ and $B$ has weight $Syn(A; B; D)$.\\
+Entropy can be thought of as a measure for the uncertainty in a 
 \subsubsection{Diffusion Kernels}
 Why diffusion kernels? Essentially allow for gene summaries that become the explanatory variable in the Bayesian model...
+
+\subsection{Between Gene Epistasis Detection}
 \subsubsection{Bayesian Interaction Modeling}
 Detecting gene-gene interactions
 \begin{itemize}
@@ -241,7 +326,7 @@ f^{(h)}(X_i) = \sum_{j_1 =1}^p \tilde{X}_{ij_1}\beta_{j_1}^{(h)} + \sum_{j_1 = 2
 \begin{equation}
 \tilde{X}_{j_1} = g_1(X_{j_1}), \quad \text{where } g_1(\cdot) \text{ is the natural spline basis function} \tag{1.4}
 \end{equation}
-\subsection{Network Interpretation}
+% \subsection{Network Interpretation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\subsection{Procedures used}
@@ -256,9 +341,13 @@ f^{(h)}(X_i) = \sum_{j_1 =1}^p \tilde{X}_{ij_1}\beta_{j_1}^{(h)} + \sum_{j_1 = 2
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
 \section{Results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Overview}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -268,34 +357,39 @@ f^{(h)}(X_i) = \sum_{j_1 =1}^p \tilde{X}_{ij_1}\beta_{j_1}^{(h)} + \sum_{j_1 = 2
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\subsection{Limitations and challenges}
+\subsection{Limitations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{Conclusion and possible extensions}
+\newpage
+\section{Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{Bibliography}
+\newpage
+\section{References}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
- \begin{thebibliography}{99}
-
-\item citation
-
-\end{thebibliography}
+\bibliography{Library}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{R-codes:}
+\appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Data Preprocessing}
 
+\section{Code}
 
-
+\section{Additional Figures \& Tables}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

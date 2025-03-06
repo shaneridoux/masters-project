@@ -335,9 +335,3 @@ for (i in seq_along(network_results)) {
   }
 }
 
-write.table(results,
-            "within-gene-syn-res/results.txt",
-            row.names = F,
-            col.names = T,
-            quote = F,
-            sep = "\t")
