@@ -192,6 +192,9 @@ University of Colorado-Denver}
 I would like to acknowledge the National Human Genome Research Institute's Pathways in Genomic Data Science Fellowship (R25HG012919) and the University of Colorado - Denver for their generous financial support of this research and my graduate education.\\
 
 \noindent
+I would also like to acknowledge the support by JDRF Australia (2-SRA-2024-1512-M-N), the recipient of the Commonwealth of Australia grant for Accelerated Research under the Medical Research Future Fund, and The Leona M. and Harry B. Helmsley Charitable Trust.
+
+\noindent
 I would like to express my gratitude to the members of the Diabetes AutoImmunity Study in the Young (DAISY) for their invaluable contribution, without which this data would not exist.\\
 
 \noindent

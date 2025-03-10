@@ -27,8 +27,8 @@ library(progress)
 library(doParallel)
 # BiocManager::install("minet")
 library(minet)
-setwd("/scratch/alpine/sridoux@xsede.org/ms-proj")
-# setwd("/Users/shane/School/CU-Denver/Masters-Project/masters-project")
+# setwd("/scratch/alpine/sridoux@xsede.org/ms-proj")
+setwd("/Users/shane/School/CU-Denver/Masters-Project/HPC-res")
 # source handmade functions
 source("information-gain.R")
 source("textme.R")
@@ -37,8 +37,10 @@ source("textme.R")
 args <- commandArgs(trailingOnly = TRUE)
 
 # Get arguments
-chunk_size <- as.numeric(args[1]) # 10,000 genes
-chunk_num <- as.numeric(args[2]) # a number 1-4
+# chunk_size <- as.numeric(args[1]) # 10,000 genes
+chunk_size <- 50
+# chunk_num <- as.numeric(args[2]) # a number 1-4
+chunk_num <- 638
 
 # load api
 api <- read.table("api.txt")
@@ -82,6 +84,7 @@ results <- list()  # Store results for each gene
 H_D <- entropy(genotype["PHENOTYPE"], method = "emp")
 
 # Detect available cores for parallel processing
+
 num_cores <- 10
 cl <- makeCluster(num_cores)
 registerDoParallel(cl)
@@ -269,14 +272,14 @@ gene_list <- unique(results$Gene)
 
 # Number of cores to use
 num_cores <- 10
-
+results$Gene[which(results$Gene == "THRA1/BTR")] <- "THRA1|BTR"
 # Run parallel processing
 network_results <- mclapply(gene_list, function(g) {
   cat("Processing:", g, "\n")  # Keep log messages for tracking progress
   
   gene_network(gene = g, bisyn = results, 
                output_dir = "within-gene-syn-graphs")
-}, mc.cores = num_cores)
+}, mc.cores = 1)
 
 # Combine graphxx and snpsbetw_centrDF into a single data frame
 network_df <- purrr::map_dfr(network_results, function(x) {
@@ -310,7 +313,7 @@ head(network_df)
 net.summary <- unique(network_df[,-c(1,2)])
 str(net.summary)
 write.table(net.summary,
-            file = "within-gene-syn-res/network_summary.tsv",
+            file = "within-gene-syn-res/network_summary-failed.tsv",
             sep = "\t",
             col.names = TRUE,
             row.names = FALSE,
@@ -322,7 +325,7 @@ net.betwn <- data.frame("gene"=network_df$gene,
                         "betwn"=network_df$snpbetw_centr)
 str(net.betwn)
 write.table(net.betwn,
-            file = "within-gene-syn-res/network_betweeness.tsv",
+            file = "within-gene-syn-res/network_betweeness-failed.tsv",
             sep = "\t",
             col.names = TRUE,
             row.names = FALSE,
@@ -358,7 +361,7 @@ textme(api = api$V1,
 
 
 write.table(results,
-            file = "within-gene-syn-res/results.tsv",
+            file = "within-gene-syn-res/failed-results.tsv",
             sep = "\t",
             quote = F,
             row.names = F,

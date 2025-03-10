@@ -5,7 +5,8 @@
 # rm(list=ls())
 # cat("\014")
 # 
-# data("iris")
+library(ggplot2)
+data("iris")
 # head(iris)
 # 
 # # just take features and make into matrix
@@ -131,7 +132,7 @@ kpca <- function(data = data, response = response, kernel = c("linear", "gaussia
   return(Z)
 }
 
-kpca_res <- kpca(data = iris, response = "Species", kernel = "diffusion", gamma = NULL, tau = 5)
+kpca_res <- kpca(data = iris, response = "Species", kernel = "gaussian", gamma = NULL, tau = 5)
 # Plot the first two components for Kernel PCA
 ggplot(kpca_res, aes(x = V1, y = V2, color = iris$Species)) +
   geom_point(size = 3) +
