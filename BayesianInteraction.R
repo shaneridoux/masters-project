@@ -68,3 +68,16 @@ write.table(intrxn_df,
             col.names = T,
             row.names = F,
             quote = F)
+
+
+# graph results
+library(igraph)
+
+# Create an edge list for the graph
+edges <- as.matrix(intrxn_df[, c("gene1", "gene2")])
+gene_network <- graph_from_edgelist(edges, directed = FALSE)
+E(gene_network)$weight <- intrxn_df$PIP
+plot(gene_network, 
+     vertex.label.cex = 0.8, 
+     edge.width = E(gene_network)$weight * 10,  # Scale edges by PIP
+     main = "Gene Interaction Network")
