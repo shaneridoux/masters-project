@@ -192,10 +192,10 @@ University of Colorado-Denver}
 I would like to acknowledge the National Human Genome Research Institute's Pathways in Genomic Data Science Fellowship (R25HG012919) and the University of Colorado - Denver for their generous financial support of this research and my graduate education.\\
 
 \noindent
-I would also like to acknowledge the support by JDRF Australia (2-SRA-2024-1512-M-N), the recipient of the Commonwealth of Australia grant for Accelerated Research under the Medical Research Future Fund, and The Leona M. and Harry B. Helmsley Charitable Trust.
+I would also like to acknowledge the support by JDRF Australia (2-SRA-2024-1512-M-N), the recipient of the Commonwealth of Australia grant for Accelerated Research under the Medical Research Future Fund, and The Leona M. and Harry B. Helmsley Charitable Trust.\\
 
 \noindent
-I would like to express my gratitude to the members of the Diabetes AutoImmunity Study in the Young (DAISY) for their invaluable contribution, without which this data would not exist.\\
+I would like to express my gratitude to the members of the Diabetes AutoImmunity Study in the Young (DAISY) for their invaluable contribution, without which the data analyized in this thesis would not exist.\\
 
 \noindent
 I am truly grateful for the mentorship I have received from my committee members - Randi K. Johnson (Advisor), Erin E. Austin, \& Joshua P. French.\\
@@ -226,38 +226,71 @@ DISCUSSION
 
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\subsection{Background}
-Epistasis, first coined by Bateson in 1909, has been defined and redefined and can carry with it some ambiguity in its definition. Often neglected, he also defined the term hypostasis \cite{batesonMendelsPrinciplesHeredity1909,cordellEpistasisWhatIt2002}. These two terms were initially meant to describe a hierarchical relationship where a higher factor (epistatic gene/allele) controls whether a lower factor (hypostatic gene/allele) can be expressed. Here \textit{epistatic} and \textit{hypostasis} come from the Greek prefixes \textit{epi} meaning "upon", \textit{hypo} meaning "under", and root \textit{stasis} meaning "standing". Thus, to Bateson, an epistatic gene "stands upon" a hypostatic gene, masking the hypostatic gene's expression. Epistasis, or \textit{dual epistacy}, was redefined by Fisher in 1918 for a statistical context in which there is a deviation from linearity of allelic effects in relation to some quantitative phenotype $D$ \cite{cordellEpistasisWhatIt2002,fisherXVTheCorrelationRelatives1919}. Here we already see differing definitions of epistasis just 9 years a part with differing implications. Fisherian statistical epistasis does not necessarily imply biological or functional epistasis, however, it can provide evidence for further investigation. 
+
+\subsection{Type 1 Diabetes \& Islet Autoimmunity}
+Type 1 Diabetes (T1D) is a complex autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels\cite{katsarouType1Diabetes2017}. Unlike \textit{monogenic} diseases -- like sickle cell disease or cystic fibrosis, which result from variation within a single gene and are relatively rare -- \textit{complex} diseases are influenced by multiple chromosomal regions containing genetic variation, known as loci \cite{MonogenicDisorderOverview}. The pathogenesis of T1D is believed to follow a continuous progression, beginning with the appearance of islet autoantibodies, followed by $\beta$-cell destruction, the onset of dysglycemia, and ultimately, the manifestation of hyperglycemia-related symptoms. Its preclinical stage, known as Islet Autoimmunity (IA), is characterized by the presence of autoantibodies prior to clinical diagnosis \cite{katsarouType1Diabetes2017,onengut-gumuscuGeneticVariantsComplement2024}. However, the precise onset of IA remains somewhat ambiguous. The definition used by the Diabetes AutoImmunity Study in the Young (DAISY) cohort classifies IA as the presence of one or more islet autoantibodies on two or more consecutive visits, or a single autoantibody-positive visit followed by a Type 1 Diabetes diagnosis at the next visit \cite{frohnertLateonsetIsletAutoimmunity2017}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trialnet.png}
+    \caption{{\bf Stages of T1D}\\
+    The progression of T1D follows three recognized stages. \textbf{Stage 1} marks the onset of Islet Autoimmunity (IA), with the presence of two or more diabetes-related autoantibodies but normal blood glucose levels. \textbf{Stage 2} is characterized by worsening $\beta$-cell function and emerging dysglycemia, despite the absence of symptoms. \textbf{Stage 3} is the clinical onset of T1D, marked by symptomatic hyperglycemia requiring insulin therapy \cite{Type1Diabetes,onengut-gumuscuGeneticVariantsComplement2024}.}
+    \label{fig:stages_t1d}
+\end{figure}
+\par
+Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising \cite{atkinsonType1Diabetes2014}, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rising-incidence-t1d.png}
+    \caption{{\bf Incidence of T1D in children aged 0-14 years} \\
+    The incidence of T1D has steadily increased across multiple countries over the past several decades, as shown in this longitudinal dataset\cite{atkinsonType1Diabetes2014}.}
+    \label{fig:incidence_t1d}
+\end{figure}
+\par
+
+T1D is primarily considered a genetic disease, with environmental factors-—such as viral infections—potentially influencing disease progression and the onset of Islet Autoimmunity (IA). Ongoing research continues to investigate the viral onset hypothesis and the role of the complement system, which is primarily encoded within the Human Leukocyte Antigen (HLA) region \cite{onengut-gumuscuGeneticVariantsComplement2024}. However, the focus of this research remains on genetic susceptibility.
+\par
+The HLA region represents the strongest and longest-known genetic risk factor for T1D. The first association between HLA and juvenile-onset T1D was reported in the early 1970s through serological HLA typing \cite{singalHistocompatibilityHLAAntigens1973}. This finding was later validated in the 1980s using targeted genetic association testing, which pinpointed specific HLA-DQB1 alleles as key determinants of T1D susceptibility \cite{toddHLADQBGeneContributes1987}. This highly polymorphic region has been associated with many other autoimmune diseases and constitutes roughly 40\% of the heritability of T1D\cite{onengut-gumuscuGeneticVariantsComplement2024}.
+\par
+Despite decades of research, questions about the genetic architecture of T1D remain. Over 60 candidate loci, collectively explaining roughly 80\% of the heritability\cite{pangMissingHeritabilityType2022}, have been identified with respect to T1D. However, this leaves approximately 20\% of heritability unexplained, a phenomenon known as the missing heritability problem. Addressing this gap requires further investigation into rare variants, common variants with small effect sizes, and gene-gene interactions (epistasis)\cite{pangMissingHeritabilityType2022,roseEpistasisImmunityRole2012}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{missing-heritability.jpg}
+    \caption{{\bf Potential sources of the missing heritability in T1D} \\
+    Here G-G interaction is a gene by gene interaction and G-E is gene by environment interaction \cite{pangMissingHeritabilityType2022}.}
+    \label{fig:missing_herit}
+\end{figure}
+
+
+
+\subsection{Epistasis}
+\textit{Epistasis} has been defined and redefined many times since its coinage by Bateson in 1909, often leading to ambiguity in its definition. Seldom mentioned, however, is that Bateson also defined the term \textit{hypostasis} \cite{batesonMendelsPrinciplesHeredity1909,cordellEpistasisWhatIt2002}. These two terms were initially meant to describe a hierarchical relationship where a higher-level factor (epistatic gene/allele) controls whether a lower-level factor (hypostatic gene/allele) can be expressed. Here, \textit{epistatic} and \textit{hypostatic} derive from the Greek prefixes \textit{epi} meaning "upon", \textit{hypo} meaning "under", and root \textit{stasis} meaning "standing". Thus, to Bateson, an epistatic gene "stands upon" a hypostatic gene, masking the hypostatic gene's expression. 
+\par
+Epistasis, or \textit{dual epistacy}, was redefined under a statistical context by Fisher in 1918 as a deviation from linearity in allelic effects with respect to some quantitative phenotype $D$ \cite{cordellEpistasisWhatIt2002,fisherXVTheCorrelationRelatives1919}. Here, we already see differing definitions of epistasis emerging just 9 years apart, each carrying distinct implications. While Fisherian statistical epistasis does not necessarily imply biological or functional epistasis, it provides a framework for detecting genetic interactions that warrant further investigation. The modern definition of epistasis is largely an umbrella term for genetic interaction. Under this umbrella, we find the term \textit{positive/negative epistasis}, which refers to the interaction between genetic variants where positive (negative) epistasis occurs when their combined effect on a trait or disease risk is greater (less) than the sum of their individual effects. At the population level, this deviation from additivity plays a crucial role in shaping genetic architecture and disease susceptibility \cite{johnsonEpistasisEvolutionRecent2023}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{epistasis.jpg}
+    \caption{{\bf Gene-Gene Interaction} \\
+    This is a conceptual model showing how Gene-Gene interactions play a role in phenotypic variation through multiple molecular interactions, including DNA-DNA, protein-DNA, protein-RNA, and protein-protein interactions \cite{wangMeaningInteraction2010}.}
+    \label{fig:epistasis}
+\end{figure}
 \par 
-The modern definition of epistasis is more of an umbrella term for genetic interaction. Under this umbrella, we find \textit{statistical epistasis}, which is the average epistasis measured over random genetic backgrounds at the population level, and \textit{positive/negative epistasis}, which refers to the effect of two mutations where postive (negative) epistasis implies the effect of the double mutant is greater (less) than the sum of its parts, i.e. the sum of the effects of the individual mutations \cite{johnsonEpistasisEvolutionRecent2023}.
+Genome-wide association studies (GWAS) are a modern approach to discover genetic associations with a disease. GWAS test millions of representative single nucleotide polymorphisms (SNPs) from a population in a linear framework where each SNP is tested for association with a phenotype individually. The standard correction to account for multiple hypothesis testing in GWAS is the Bonferroni correction, which adjusts for the number of independent SNPs in the genome. This method typically applies a genome-wide significance threshold of $5\times 10^{-8}$ for European populations to identify statistically significant associations and similar but more stringent threshold for African populations \cite{evangelouGeneticEpidemiologyMethods2018,shamStatisticalPowerSignificance2014}.
+\par
+There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the p-value. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence and testing SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. Applying the standard threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes\cite{jiangBayesianMethodEvaluating2011,shamStatisticalPowerSignificance2014}.
+\par
+Genome-wide association interaction (GWAI) studies are an extension of GWAS aimed at epistasis detection\cite{bessonovCautionaryNoteImpact2015,gusarevaPracticalAspectsGenomewide2014}. There are two categories of methods that emerge when considering GWAI: exhaustive and non-exhaustive\cite{gusarevaPracticalAspectsGenomewide2014}. Non-exhaustive methods avoid the challenge of multiple testing correction by limiting the analysis in some way. Typically, these analyses determine candidate genes a prior to test, use GWAS results to look at interactions between significant SNPs overlooking those SNPs with small effects with potentially large interaction effects, or use some sort of dimensionality reduction\cite{gusarevaPracticalAspectsGenomewide2014,anChallengeDetectingEpistasis2009}. To address the burden of multiple testing in exhaustive approaches, Bayesian methods have been recommended for both GWAS and GWAI\cite{jiangBayesianMethodEvaluating2011,stephensBayesianStatisticalMethods2009,lopezBayesianStatisticalMethods,zhouPolygenicModelingBayesian2013,shamStatisticalPowerSignificance2014}.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% Type 1 Diabetes (T1D) is an autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels. Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
-% 
-% \includegraphics{/Users/shane/School/CU-Denver/24-Fall/Research-Methods/rising-incidence-t1d.png}{\\ \tiny Figure 1: Incidence of T1D}  
-% 
-% \par
-% Type 1 Diabetes is strongly influenced by genetic factors, with nearly 40\% of the risk attributed to the highly polymorphic Major Histocompatibility Complex (MHC), which is associated with various diseases. This region includes genes encoding components of the complement system which acts as a rapid and targeted innate immune defense mechanism against pathogens, primarily through promoting inflammation and modulating the adaptive immune response. However, the efficiency and regulation of complement activity varies among individuals largely due to inherited genetic differences.
-
-
+\subsection{Bayesian Statistics}
+Bayesian approaches incorporate prior probabilities and probabilistic modeling to improve statistical power and control false positives, particularly in the context of epistasis and complex diseases.
+** talk about bayesian stats broadly and narrow to our context**
 
 \subsection{Motivation}
-% While genetic polymorphisms within the complement system significantly affect its activity and regulation, their role in immune activation and T1D progression remains underexplored due to the oversight of epistatic interactions. Genetic epistasis is most commonly understood as gene interaction where the contribution of one gene on the phenotypic outcome is dependent on genetic background (citation). The complotype is the total inherited set of genetic variants in complement genes \cite{walakiraDetectingGeneGene2022} (citation) and can be thought of as the genetic background for the complement system. 
-% \par
-% The complotype impacts the activation potential of the complement and immune system where an overactive complement system influences susceptibility to inflammation and autoimmune disease while an underactive complement system results in increased risk for infection. While individual polymorphisms within the complotype have a minor impact on activation potential, their aggregate effect is believed to be greatly amplified either synergistically or antagonistically (citation?). Polymorphisms in complement genes have been shown to be associated with type 1 diabetes however, epistasis in complement genes has yet to be studied in type 1 diabetes.
+Epistasis is particularly important in complex autoimmune diseases, where interactions between immune-related loci can shape immune system function and the loss of self-tolerance\cite{roseEpistasisImmunityRole2012}. T1D is a prime example of this.
+** generally summarize all three background sections to motivate this specific method and how it addresses everything we want it to**
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
@@ -280,9 +313,7 @@ The modern definition of epistasis is more of an umbrella term for genetic inter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \subsection{Bayesian Motivation}
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% A Genome-Wide Association Study (GWAS) tests millions of representative single nucleotide polymorphisms (SNPs) from a population in a linear framework where each SNP is tested for association with a phenotype individually (citation). Testing interactions among these SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. A typical approach adjusting for multiple hypotheses in a GWAS would be to use Bonferoni correction for the determined number of independent SNPs in a genome with the standard significance threshold being set at $5\times 10^{-8}$. 
-% \par 
-% There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the p-value. Additionally, its foundation on the number of independent SNPs in a European reference population neglects the genetic diversity across populations and the influence of genetic context. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence. Applying the threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes. Bayesian methods have been applied to address false positives in GWAS especially in the context of epistasis.
+
 \subsection{Overview}
 \subsection{Data Preparation}
 Talk about imputation and DAISY Cohort and potentially TEDDY Cohort

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.18)  6 MAR 2025 14:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.18)  17 MAR 2025 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -455,7 +455,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-</Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf, id=100, 279.0425pt x 144.54pt>
+</Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf, id=108, 279.0425pt x 144.54pt>
 File: /Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf Graphic file (type pdf)
 <use /Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf>
 Package pdftex.def Info: /Users/shane/School/CU-Denver/Templates/images/CU_Logo.pdf  used on input line 162.
@@ -507,79 +507,125 @@ Underfull \hbox (badness 10000) in paragraph at lines 204--206
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 207--209
+
+ []
+
+
 
 [2]
 
 [3]
+<trialnet.png, id=176, 621.07031pt x 361.35pt>
+File: trialnet.png Graphic file (type png)
+<use trialnet.png>
+Package pdftex.def Info: trialnet.png  used on input line 236.
+(pdftex.def)             Requested size: 361.35136pt x 210.23927pt.
+
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.276 \newpage
-               [1]
+l.243 
+       [1 <./trialnet.png>]
+<rising-incidence-t1d.png, id=196, 633.36626pt x 362.35374pt>
+File: rising-incidence-t1d.png Graphic file (type png)
+<use rising-incidence-t1d.png>
+Package pdftex.def Info: rising-incidence-t1d.png  used on input line 246.
+(pdftex.def)             Requested size: 361.35136pt x 206.73729pt.
+<missing-heritability.jpg, id=206, 533.74406pt x 291.33844pt>
+File: missing-heritability.jpg Graphic file (type jpg)
+<use missing-heritability.jpg>
+Package pdftex.def Info: missing-heritability.jpg  used on input line 260.
+(pdftex.def)             Requested size: 361.35136pt x 197.24509pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.306 \item o
-             ne continuous variable per gene [2]
-Underfull \hbox (badness 10000) in paragraph at lines 312--313
+l.270 \par
+           [2 <./rising-incidence-t1d.png>]
+<epistasis.jpg, id=224, 460.72125pt x 315.42844pt>
+File: epistasis.jpg Graphic file (type jpg)
+<use epistasis.jpg>
+Package pdftex.def Info: epistasis.jpg  used on input line 274.
+(pdftex.def)             Requested size: 361.35136pt x 247.39528pt.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 314--315
-
- []
-
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-[3
-pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.345 \newpage
-              
-pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.345 \newpage
-              
-pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.345 \newpage
-              ]
 
-[4]
+[3 <./missing-heritability.jpg>]
+
+[4 <./epistasis.jpg>]
 
 [5]
 
-[6] (./Masters-Thesis.bbl)
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 346--347
 
-[7] (./Masters-Thesis.aux)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
+
+ []
+
+
+
+[7
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.379 \newpage
+              
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.379 \newpage
+              
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.379 \newpage
+              ]
+
+[8]
+
+[9]
+
+[10] (./Masters-Thesis.bbl
+
+[11])
+
+[12]
+
+[13] (./Masters-Thesis.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Masters-Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 5C8C84DA4078CB8969D9188DCC504203;3087.
+(rerunfilecheck)             Checksum: C9A2CCDCBBAE3FFE08E1E62BB49DB2EA;3494.
  ) 
 Here is how much of TeX's memory you used:
- 13618 strings out of 475172
- 217042 string characters out of 5765285
- 606255 words of memory out of 5000000
- 36342 multiletter control sequences out of 15000+600000
+ 13748 strings out of 475172
+ 221178 string characters out of 5765285
+ 610929 words of memory out of 5000000
+ 36440 multiletter control sequences out of 15000+600000
  574681 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,7n,79p,1405b,496s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1562b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Masters-Thesis.pdf (12 pages, 203120 bytes).
+Output written on Masters-Thesis.pdf (18 pages, 844884 bytes).
 PDF statistics:
- 614 PDF objects out of 1000 (max. 8388607)
- 256 compressed objects within 3 object streams
- 47 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 765 PDF objects out of 1000 (max. 8388607)
+ 350 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 238 words of extra memory for PDF output out of 10000 (max. 10000000)
 
