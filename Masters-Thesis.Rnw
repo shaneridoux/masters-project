@@ -249,7 +249,7 @@ Often diagnosed in early childhood, T1D left untreated can result in serious com
 \end{figure}
 \par
 
-T1D is primarily considered a genetic disease, with environmental factors-—such as viral infections—potentially influencing disease progression and the onset of Islet Autoimmunity (IA). Ongoing research continues to investigate the viral onset hypothesis and the role of the complement system, which is primarily encoded within the Human Leukocyte Antigen (HLA) region \cite{onengut-gumuscuGeneticVariantsComplement2024}. However, the focus of this research remains on genetic susceptibility.
+T1D is primarily considered a genetic disease, with environmental factors-—such as viral infections—potentially influencing disease progression and the onset of IA. Ongoing research continues to investigate the viral onset hypothesis and the role of the complement system, which is primarily encoded within the Human Leukocyte Antigen (HLA) region \cite{onengut-gumuscuGeneticVariantsComplement2024}. However, the focus of this research remains on genetic susceptibility.
 \par
 The HLA region represents the strongest and longest-known genetic risk factor for T1D. The first association between HLA and juvenile-onset T1D was reported in the early 1970s through serological HLA typing \cite{singalHistocompatibilityHLAAntigens1973}. This finding was later validated in the 1980s using targeted genetic association testing, which pinpointed specific HLA-DQB1 alleles as key determinants of T1D susceptibility \cite{toddHLADQBGeneContributes1987}. This highly polymorphic region has been associated with many other autoimmune diseases and constitutes roughly 40\% of the heritability of T1D\cite{onengut-gumuscuGeneticVariantsComplement2024}.
 \par
@@ -283,12 +283,25 @@ There are issues with this standard of practice. The standard genome-wide signif
 Genome-wide association interaction (GWAI) studies are an extension of GWAS aimed at epistasis detection\cite{bessonovCautionaryNoteImpact2015,gusarevaPracticalAspectsGenomewide2014}. There are two categories of methods that emerge when considering GWAI: exhaustive and non-exhaustive\cite{gusarevaPracticalAspectsGenomewide2014}. Non-exhaustive methods avoid the challenge of multiple testing correction by limiting the analysis in some way. Typically, these analyses determine candidate genes a prior to test, use GWAS results to look at interactions between significant SNPs overlooking those SNPs with small effects with potentially large interaction effects, or use some sort of dimensionality reduction\cite{gusarevaPracticalAspectsGenomewide2014,anChallengeDetectingEpistasis2009}. To address the burden of multiple testing in exhaustive approaches, Bayesian methods have been recommended for both GWAS and GWAI\cite{jiangBayesianMethodEvaluating2011,stephensBayesianStatisticalMethods2009,lopezBayesianStatisticalMethods,zhouPolygenicModelingBayesian2013,shamStatisticalPowerSignificance2014}.
 
 \subsection{Bayesian Statistics}
+
+Bayesian statistics is named after Reverend Thomas Bayes, a part-time mathematician who was among the first recorded individuals to attempt solving the problem of inverse probability\cite{shoemakerBayesianStatisticsGenetics1999,gelmanBayesianDataAnalysisa}. Inverse probability seeks to determine the probability of a cause given an observed outcome as opposed to classical probabilty which estimates the likelihood of an event given known conditions. In Bayes' work that was post-humously communicated by his friend and colleague Richard Price, he posed the problem 
+\begin{quote}
+    "\textit{Given} the number of times in which an unknown event has happened and failed: 
+    \textit{Required} the chance that the probability of its happening in a single trial lies 
+    somewhere between any two degrees of probability that can be named." \cite{bayesLIIEssaySolving1997}
+\end{quote}
+
+\noindent
+Bayes' original work did not explicitly introduce what we now know as Bayes' theorem:
+$$p(\theta|y) = \frac{p(y|\theta)p(\theta)}{p(y)}$$
+This was instead formulated by Laplace. Bayes' contribution was rather the concept of compromising prior information with information from observed data. He introduces this concept with an analogy to a billiard table where he considers a scenario where a ball is randomly thrown onto a unit interval, and the goal is to estimate the probability of a future event occuring based on where the ball landed. Bayes introduced what we would now call a uniform prior distribution on $\theta$ such that $\theta$ was modeled as the probability parameter of a binomial distribution\cite{bayesLIIEssaySolving1997,fienbergWhenDidBayesian2006}. \\
+** CONTINUE HISTORY UNTIL idk**\\
 Bayesian approaches incorporate prior probabilities and probabilistic modeling to improve statistical power and control false positives, particularly in the context of epistasis and complex diseases.
-** talk about bayesian stats broadly and narrow to our context**
+**talk about bayesian stats broadly and narrow to our context**
 
 \subsection{Motivation}
 Epistasis is particularly important in complex autoimmune diseases, where interactions between immune-related loci can shape immune system function and the loss of self-tolerance\cite{roseEpistasisImmunityRole2012}. T1D is a prime example of this.
-** generally summarize all three background sections to motivate this specific method and how it addresses everything we want it to**
+**generally summarize all three background sections to motivate this specific method and how it addresses everything we want it to**
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

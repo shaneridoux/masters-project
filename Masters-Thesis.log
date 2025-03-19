@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.18)  17 MAR 2025 17:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.18)  17 MAR 2025 22:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -567,45 +567,47 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [5]
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 346--347
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 359--360
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 348--349
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
 
 
-[7
+[8
 pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.379 \newpage
+l.392 \newpage
               
 pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.379 \newpage
+l.392 \newpage
               
 pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.379 \newpage
+l.392 \newpage
               ]
-
-[8]
 
 [9]
 
-[10] (./Masters-Thesis.bbl
+[10]
 
-[11])
+[11] (./Masters-Thesis.bbl
 
 [12]
 
-[13] (./Masters-Thesis.aux)
+[13])
+
+[14] (./Masters-Thesis.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -614,18 +616,18 @@ Package rerunfilecheck Info: File `Masters-Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: C9A2CCDCBBAE3FFE08E1E62BB49DB2EA;3494.
  ) 
 Here is how much of TeX's memory you used:
- 13748 strings out of 475172
- 221178 string characters out of 5765285
- 610929 words of memory out of 5000000
- 36440 multiletter control sequences out of 15000+600000
+ 13767 strings out of 475172
+ 221823 string characters out of 5765285
+ 611157 words of memory out of 5000000
+ 36454 multiletter control sequences out of 15000+600000
  574681 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,1562b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1562b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </Users/shane/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></Users/shane/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Masters-Thesis.pdf (18 pages, 844884 bytes).
+Output written on Masters-Thesis.pdf (19 pages, 848651 bytes).
 PDF statistics:
- 765 PDF objects out of 1000 (max. 8388607)
- 350 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
+ 780 PDF objects out of 1000 (max. 8388607)
+ 363 compressed objects within 4 object streams
+ 84 named destinations out of 1000 (max. 500000)
  238 words of extra memory for PDF output out of 10000 (max. 10000000)
 
