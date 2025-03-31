@@ -1,0 +1,30 @@
+\contentsline {section}{Dedication}{i}{section*.3}%
+\contentsline {section}{Acknowledgements}{ii}{section*.4}%
+\contentsline {section}{Abstract}{iii}{section*.5}%
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Type 1 Diabetes \& Islet Autoimmunity}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Epistasis}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Bayesian Statistics}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Motivation}{6}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Methodology}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Overview}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Data Preparation}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Summarizing Within-Gene Epistasis}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Entropy}{8}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Mutual Information}{11}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Computing Within-Gene SNP Synergies}{12}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Diffusion Kernel Principal Compents as Gene Summaries}{13}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Between-Gene Epistasis Detection}{15}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Gaussion Process Regression}{16}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Bayesian Interaction Modeling}{17}{subsubsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.5}Prioritized Gene-Pair SNP Synergies}{20}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Results}{21}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Overview}{21}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Plots}{21}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Limitations}{21}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Discussion}{22}{section.4}%
+\contentsline {section}{\numberline {5}Conclusion}{23}{section.5}%
+\contentsline {section}{\numberline {6}References}{24}{section.6}%
+\contentsline {section}{\numberline {A}Data Preprocessing}{27}{appendix.A}%
+\contentsline {section}{\numberline {B}Code}{27}{appendix.B}%
+\contentsline {section}{\numberline {C}Additional Figures \& Tables}{27}{appendix.C}%

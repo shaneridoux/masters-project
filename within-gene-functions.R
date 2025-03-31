@@ -27,6 +27,29 @@ get_L <- function(gene, bisyn, output_dir){
   return(Laplacian) 
 }
 
+get_L_chr <- function(chr, bisyn, output_dir){
+  gene_data <- bisyn[bisyn$Gene == gene, ]
+  
+  nameVals <- sort(unique(c(gene_data$SNP1, gene_data$SNP2)))
+  # construct 0 matrix of correct dimensions with row and column names
+  myMat <- matrix(0, length(nameVals), length(nameVals), dimnames = list(nameVals, nameVals))
+  # fill in the matrix with matrix indexing on row and column names
+  myMat[as.matrix(gene_data[c("SNP1", "SNP2")])] <- gene_data$Synergy
+  myMat[as.matrix(gene_data[c("SNP2", "SNP1")])] <- gene_data$Synergy
+  LD<-myMat
+  diag(LD) = 0 #make diagonal zero i.e no info between the same snp
+  
+  
+  ## Make the Diffusion Laplacian matrix
+  D<-diag(rowSums(LD))
+  Laplacian<-as.matrix(D-LD)
+  write.csv(Laplacian,
+            file = paste0(output_dir,"/",gene_name,"_L_matrix.csv"),
+            row.names = T,
+  )
+  return(Laplacian) 
+}
+
 get_network <- function(gene, Laplacian, output_dir){
   LD <- -Laplacian
   diag(LD) = 0
@@ -38,7 +61,7 @@ get_network <- function(gene, Laplacian, output_dir){
   #--------------------------------------------------------------------------
   # mrnet: Maximum Relevance Minimum Redundancy
   graph_mrnet = mrnet(LD)
-  
+  # graph_mrnet = LD
   datgraph_mrnet = graph_from_adjacency_matrix(graph_mrnet, mode = "undirected", weighted = TRUE,
                                                diag = FALSE)
   #remove loops
@@ -113,3 +136,4 @@ get_network <- function(gene, Laplacian, output_dir){
   write.csv(res$snpsbetw_centrDF, file = betweenness_path, row.names = TRUE)
   return(res)
 }
+

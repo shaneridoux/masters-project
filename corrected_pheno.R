@@ -31,6 +31,16 @@ pc_model <- glm(PHENO ~ PC1 + PC2 + PC3 + PC4 + PC5 + PC6 + PC7,
 data$Phenotype_corrected <- residuals(pc_model, type = "response")
 hist(data$Phenotype_corrected, breaks = 30, main = "Histogram of Corrected Phenotype")
 
+
+write.table(data, 
+            quote = FALSE,
+            col.names = TRUE,
+            row.names = FALSE,
+            sep = "\t",
+            file = "/Users/shane/School/CU-Denver/Masters-Project/residualized-pheno.txt")
+
+
+
 # discretize pheno
 library(infotheo)
 data$Phenotype_discretized <- discretize(data$Phenotype_corrected, 

@@ -18,9 +18,9 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # Get arguments
 chunk_size <- as.numeric(args[1]) # 10,000 genes
-# chunk_size <- 200
+# chunk_size <- 1000
 chunk_num <- as.numeric(args[2]) # a number 1-4
-# chunk_num <- 1
+# chunk_num <- 4
 
 
 # load api
@@ -30,7 +30,7 @@ api <- read.table("api.txt")
 genotype <- fread("genotype-matrix-hg19-annotated-pheno.tsv") %>% as.data.frame()
 
 # load gene snp map
-load("gene_snp_map_filtered.RData")
+load("gene_snp_map_filtered-v2.RData")
 
 # names of genes that completed laplacian step
 path <- "within-gene-syn-res/Laplacians/"
@@ -57,6 +57,7 @@ gene_snp_chunk <- genes[start:stop]
 
 for (gene in gene_snp_chunk) {
   # Load and process Laplacian matrix
+  print(gene)
   laplacian <- fread(paste0(path, gene, "_L_matrix.csv")) %>%
     as.data.frame() %>%  
     column_to_rownames(var = "V1") %>%
@@ -64,7 +65,7 @@ for (gene in gene_snp_chunk) {
     as.matrix()
   
   # Extract SNPs for the gene
-  snps <- gene_snps_filtered[[gene]]
+  snps <- gene_snps_filtered_sorted[[gene]]
   genotype_gene[[gene]] <- genotype[, snps] %>% as.matrix()
   laplacians[[gene]] <- list(laplacian, genotype_gene[[gene]])
   

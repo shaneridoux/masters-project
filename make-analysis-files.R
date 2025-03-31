@@ -51,7 +51,17 @@ selected_cols <- grep(";", names(gene_snps_filtered_sorted), value = TRUE)
 
 gene_snps_filtered_sorted <- gene_snps_filtered_sorted[!names(gene_snps_filtered_sorted) %in% selected_cols]
 
-save(gene_snps_filtered_sorted, file = "gene_snp_map_filtered.RData")
+csmd1 <- genotype[,colnames(genotype) %in% gene_snps_filtered_sorted$CSMD1]
+
+write.table(gene_snps_filtered_sorted$CSMD1, "csmd1_snp_list.txt", 
+            row.names = FALSE, col.names = FALSE, quote = FALSE)
+
+csdm1_snps.keep <- fread("/Users/shane/School/CU-Denver/Masters-Project/csmd1_pruned_strict.prune.in",
+                         header = FALSE)
+
+gene_snps_filtered_sorted$CSMD1 <- csdm1_snps.keep$V1
+
+save(gene_snps_filtered_sorted, file = "gene_snp_map_filtered-v2.RData")
 
 write.table(genotype,
             file = "genotype-matrix-hg19-annotated-pheno.tsv",
