@@ -8,3 +8,9 @@ api.*
 *.jpg
 *.ipynb*
 *.Rproj
+*.tex
+*.log
+*.bbl
+*.out
+*.toc
+*.Rnw
