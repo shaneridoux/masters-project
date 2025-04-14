@@ -9,22 +9,32 @@
 \contentsline {section}{\numberline {2}Methodology}{7}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Overview}{7}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Data Preparation}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Summarizing Within-Gene Epistasis}{7}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Entropy}{8}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Mutual Information}{11}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Computing Within-Gene SNP Synergies}{12}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Diffusion Kernel Principal Compents as Gene Summaries}{13}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}Between-Gene Epistasis Detection}{15}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Gaussion Process Regression}{16}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Bayesian Interaction Modeling}{17}{subsubsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.5}Prioritized Gene-Pair SNP Synergies}{20}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.1}DAISY}{7}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Quality Control}{7}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Summarizing Within-Gene Epistasis}{9}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Overview}{9}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Entropy}{9}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Mutual Information}{12}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Computing Within-Gene SNP Synergies}{13}{subsubsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.5}Diffusion Kernel Principal Compents as Gene Summaries}{14}{subsubsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.4}Between-Gene Epistasis Detection}{16}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Bayesian Interaction Modeling}{17}{subsubsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.5}Over-Representation Analysis}{20}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Prioritized SNP Synergies}{20}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Logistic Regression}{21}{subsubsection.2.6.1}%
 \contentsline {section}{\numberline {3}Results}{21}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Overview}{21}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Plots}{21}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Limitations}{21}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Discussion}{22}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion}{23}{section.5}%
-\contentsline {section}{\numberline {6}References}{24}{section.6}%
-\contentsline {section}{\numberline {A}Data Preprocessing}{27}{appendix.A}%
-\contentsline {section}{\numberline {B}Code}{27}{appendix.B}%
-\contentsline {section}{\numberline {C}Additional Figures \& Tables}{27}{appendix.C}%
+\contentsline {subsection}{\numberline {3.2}Within-Gene Epistasis and Gene Summaries}{22}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Bayesian Gene-Gene Interaction Modeling}{22}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Pathway Enrichment Prioritization}{24}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Direction of Effect via Logistic Regression}{28}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Limitations}{28}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Diffusion Parameter}{28}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Convergence}{29}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Assumption of Normality in the Response}{30}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Power}{30}{subsubsection.3.6.4}%
+\contentsline {section}{\numberline {4}Discussion}{31}{section.4}%
+\contentsline {section}{\numberline {5}References}{33}{section.5}%
+\contentsline {section}{\numberline {A}Data Preprocessing}{37}{appendix.A}%
+\contentsline {section}{\numberline {B}Code}{37}{appendix.B}%
+\contentsline {section}{\numberline {C}Additional Figures \& Tables}{37}{appendix.C}%

@@ -112,8 +112,6 @@ E(G)$width <- E(G)$weight * 10  # scale as needed
 
 G_top <- delete_edges(G, E(G)[abs(weight) < threshold])
 node_size <- degree(G_top, mode = "all")
-# Create a layout
-graph_layout <- layout_with_fr(G_top)  # Force-directed layout
 
 # Get node names from the graph
 node_names <- V(G_top)$name
@@ -127,6 +125,9 @@ V(G_top)$exonic_function <- exonic_function_vector
 V(G_top)$gene <- anno$gene[match(node_names, anno$topmed)]
 V(G_top)$node_size <- node_size
 V(G_top)$label <- ifelse(V(G_top)$node_size > 0, V(G_top)$name, NA)
+snp_pos <- stringr::str_extract(V(G_top)$name, "(?<=:)[0-9]+") %>% as.numeric()
+snp_rank <- rank(snp_pos, ties.method = "first")
+
 original_names <- V(G_top)$name
 new_names <- seq_along(original_names)
 name_dict <- data.frame(original = original_names,
@@ -138,6 +139,13 @@ V(G_top)$label <- ifelse(V(G_top)$node_size > 0, V(G_top)$name, NA)
 E(G_top)$edge_color <- factor(
   ifelse(E(G_top)$weight * signs[as_edgelist(G_top)] < 0, "-", "+"),
   levels = c("+", "-")  # include both
+)
+
+# Create a layout
+# graph_layout <- layout_with_fr(G_top)  # Force-directed layout
+graph_layout <- cbind(
+  x = snp_rank,
+  y = jitter(degree(G_top), amount = .5)  # adjust `amount` as needed
 )
 # Plot the network
 g <- ggraph(G_top, layout = graph_layout) +
@@ -174,7 +182,7 @@ for(k in 1:nrow(main)){
     mutate(across(everything(), as.numeric)) %>%
     as.matrix()
   
-  A = -L
+  A = -gene_L
   diag(A) = 0
   
   # Set node size by degree centrality
@@ -188,8 +196,6 @@ for(k in 1:nrow(main)){
   
   G_top <- delete_edges(G, E(G)[abs(weight) < threshold])
   node_size <- degree(G_top, mode = "all")
-  # Create a layout
-  graph_layout <- layout_with_fr(G_top)  # Force-directed layout
   
   # Get node names from the graph
   node_names <- V(G_top)$name
@@ -204,6 +210,9 @@ for(k in 1:nrow(main)){
   V(G_top)$node_size <- node_size
   V(G_top)$label <- ifelse(V(G_top)$node_size > 0, V(G_top)$name, NA)
   original_names <- V(G_top)$name
+  snp_pos <- stringr::str_extract(V(G_top)$name, "(?<=:)[0-9]+") %>% as.numeric()
+  snp_rank <- rank(snp_pos, ties.method = "first")
+  
   new_names <- seq_along(original_names)
   name_dict <- data.frame(original = original_names,
                           renamed = new_names,
@@ -215,6 +224,18 @@ for(k in 1:nrow(main)){
     ifelse(E(G_top)$weight * signs[as_edgelist(G_top)] < 0, "-", "+"),
     levels = c("+", "-")  # include both
   )
+  
+  # Create a layout
+  # graph_layout <- layout_with_fr(G_top)  # Force-directed layout
+  # graph_layout <- cbind(
+  #   x = snp_pos,
+  #   y = jitter(rep(0, length(snp_pos)), amount = 1)  # or use degree, etc.
+  # )
+  graph_layout <- cbind(
+    x = snp_rank,
+    y = jitter(degree(G_top), amount = .5)  # adjust `amount` as needed
+  )
+  
   # Plot the network
   g <- ggraph(G_top, layout = graph_layout) +
     geom_edge_link(aes(edge_alpha = weight, color = edge_color), show.legend = c(edge_color = TRUE, edge_alpha = FALSE)) +
@@ -244,4 +265,4 @@ for(k in 1:nrow(main)){
               col.names = TRUE,
               row.names = FALSE)
 }
-cat(paste0("------------------ CHR",chr," DONE! ------------------"))
+cat(paste0("------------------ CHR",chr," DONE! ------------------\n"))

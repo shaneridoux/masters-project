@@ -33,28 +33,48 @@ Y <- fread("/Users/shane/School/CU-Denver/Masters-Project/residualized-pheno.txt
 
 colnames(Y) <- c("SEX","PHENOTYPE")
 
+chr_main <- fread("/Users/shane/School/CU-Denver/Masters-Project/HPC-res/bayesian-intrxn/chr-pairs/main-pip.tsv") %>%
+  as.data.frame()
 
-NLmod1 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=1)
-NLmod2 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=2)
-NLmod3 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=3)
-NLmod4 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=4)
-NLmod5 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=5)
-NLmod6 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=6)
-NLmod7 = NLint(Y=Y[,"PHENOTYPE"], X=X, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=7)
+chr_intrxn <- fread("/Users/shane/School/CU-Denver/Masters-Project/HPC-res/bayesian-intrxn/chr-pairs/intrxn-pip.tsv") %>%
+  as.data.frame() %>%
+  arrange(desc(PIP)) 
 
-waic <- data.frame("ns"=seq(1,7), "waic"=NA)
-waic$waic <- c(NLmod1$waic,NLmod2$waic,NLmod3$waic,NLmod4$waic,NLmod5$waic,NLmod6$waic,NLmod7$waic)
-best_ns <- waic$ns[which.min(waic$waic)] 
+chr_pairs <- chr_intrxn %>%
+  select(chr1,chr2) 
 
-NLmod <- switch(best_ns,
-                `1` = NLmod1,
-                `2` = NLmod2,
-                `3` = NLmod3,
-                `4` = NLmod4,
-                `5` = NLmod5,
-                `6` = NLmod6,
-                `7` = NLmod7
-)
+#anno 
+anno <- fread("/Users/shane/School/CU-Denver/Masters-Project/anno_file_reduced.tsv") %>% 
+  as.data.frame() 
+
+#subset feature space of genes by chromosmal pairs
+chrs <- as.character(unlist(chr_pairs[1,]))
+chrs_num <- gsub("chr", "", chrs)
+genes <- anno$gene[anno$chr %in% chrs_num]
+X_sub <- X[,genes]
+
+NLmod = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=1)
+# NLmod2 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=2)
+# NLmod3 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=3)
+# NLmod4 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=4)
+# NLmod5 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=5)
+# NLmod6 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=6)
+# NLmod7 = NLint(Y=Y[,"PHENOTYPE"], X=X_sub, C=NULL, nIter=20000, nBurn=2, thin=5, nChains=2, ns=7)
+
+# waic <- data.frame("ns"=seq(1,7), "waic"=NA)
+# (waic$waic <- c(NLmod1$waic,NLmod2$waic,NLmod3$waic,NLmod4$waic,NLmod5$waic,NLmod6$waic,NLmod7$waic))
+# (best_ns <- waic$ns[which.min(waic$waic)])
+
+# NLmod <- switch(best_ns,
+#                 `1` = NLmod1,
+#                 `2` = NLmod2,
+#                 `3` = NLmod3,
+#                 `4` = NLmod4,
+#                 `5` = NLmod5,
+#                 `6` = NLmod6,
+#                 `7` = NLmod7
+# )
+
 
 ################# Posterior inclusion probabilities
 

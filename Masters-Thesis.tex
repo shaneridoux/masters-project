@@ -71,6 +71,7 @@
 \usepackage{sectsty}
 \usepackage{subfig}
 \usepackage{float}
+
 % \usepackage{nopageno}   % Suppresses page numbers
 
 \newcommand{\B}{\bf}
@@ -219,13 +220,13 @@ Thank you to my family and friends for helping me find balance en route to finis
 \section*{Abstract}  % Unnumbered section
 \addcontentsline{toc}{section}{Abstract}  % Add to Table of Contents
 \par
-Type 1 Diabetes (T1D) is a complex autoimmune disease characterized by the erroneous destruction of islet $\beta$-cells resulting in life-long dependence on exogenous insulin. Although T1D is considered to be largely genetic, with the heritability of the disease around 80\%, roughly 20\% of the phenotypic variance is still unexplained. Epistasis, the interaction of genetic variants, is thought to contribute to this missing heritability in T1D, yet the epistatic landscape of T1D and its precursor Islet Autoimmunity (IA) remains understudied. A genome-wide analysis of the epistatic architecture of IA could inform potential biological pathways in the etiology of T1D in addition to elucidating aspects of its missing heritability. 
+Type 1 Diabetes (T1D) is a complex autoimmune disease characterized by the erroneous destruction of pancreatic islet $\beta$-cells resulting in life-long dependence on exogenous insulin. Although T1D is considered to be largely genetic, with the heritability of the disease around 80\%, roughly 20\% of the phenotypic variance is still unexplained. Epistasis, the interaction of genetic variants, is thought to contribute to this missing heritability in T1D, yet the epistatic landscape of T1D and its precursor Islet Autoimmunity (IA) remains understudied. A genome-wide analysis of the epistatic architecture of IA could inform potential biological pathways in the etiology of T1D in addition to elucidating aspects of its missing heritability. 
 \par
-After quality control, 359 DAISY children selected for nested case-control study with a customized Exome array imputed to the TOPMed r2 reference panel were included for analysis of genome-wide epistasis detection. Within-gene synergy networks were used to capture non-linear epistatic effects and summarized through diffusion kernel principal components (kPC). Between-gene epistasis was detected through a bayesian interaction analysis of kPC-summarized genes.
+After quality control, 359 DAISY children selected for nested case-control study with a customized Exome array imputed to the TOPMed r2 reference panel were included for analysis of genome-wide epistasis detection. Within-gene synergy networks were used to capture non-linear epistatic effects and summarized through diffusion kernel principal components (kPC). Between-gene epistasis was detected through a Bayesian interaction analysis of kPC-summarized genes.
 \par
-RESULTS
+Posterior inclusion probabilities (PIPs) derived from the Bayesian model identified candidate genes and gene-pairs with potential involvement in IA onset. While convergence diagnostics indicated poor MCMC mixing, PIPs were still obtained for downstream prioritization. Pathway enrichment analysis of genes with high PIPs revealed strong overrepresentation in Reactome pathways related to the immune system, as well as tissue-specific downregulation in the pancreas. A power analysis constrained SNP-level follow-up testing to seven pairs, one of which--between \textit{PMM2} and \textit{NOD2}--approached nominal significance (odds ratio = 5.08; 95\% CI: [0.94, 27.56]).
 \par
-DISCUSSION
+This study presents genome-wide, multi-stage framework for detecting both within- and between-gene epistasis in genomic data. While limited by small sample size, the results reveal biologically coherent signals aligned with known mechanisms of T1D and IA, including innate immunity and MHC class II antigen-presentation. The use of diffusion-based gene summaries and Bayesian variable selection enabled interpretable prioritization of candidate loci and interactions despite the high dimensionality of the data. Findings from this study warrant further investigation in larger cohorts to validate emerging epistatic signals and explore their functional relevance in the etiology of IA and T1D.
 
 \newpage
 \pagenumbering{arabic}
@@ -237,7 +238,7 @@ DISCUSSION
 
 \subsection{Type 1 Diabetes \& Islet Autoimmunity}
 \label{sec:ia}
-Type 1 Diabetes (T1D) is a complex autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels\cite{katsarouType1Diabetes2017}. Unlike \textit{monogenic} diseases -- like sickle cell disease or cystic fibrosis, which result from variation within a single gene and are relatively rare -- \textit{complex} diseases are influenced by multiple chromosomal regions containing genetic variation, known as loci \cite{MonogenicDisorderOverview}. The pathogenesis of T1D is believed to follow a continuous progression, beginning with the appearance of islet autoantibodies, followed by $\beta$-cell destruction, the onset of dysglycemia, and ultimately, the manifestation of hyperglycemia-related symptoms. Its preclinical stage, known as Islet Autoimmunity (IA), is characterized by the presence of autoantibodies prior to clinical diagnosis \cite{katsarouType1Diabetes2017,onengut-gumuscuGeneticVariantsComplement2024}. However, the precise onset of IA remains somewhat ambiguous. The definition used by the Diabetes AutoImmunity Study in the Young (DAISY) cohort classifies IA as the presence of one or more islet autoantibodies on two or more consecutive visits, or a single autoantibody-positive visit followed by a Type 1 Diabetes diagnosis at the next visit \cite{frohnertLateonsetIsletAutoimmunity2017}.
+Type 1 Diabetes (T1D) is a complex autoimmune disorder where the immune system erroneously targets and destroys insulin-producing pancreatic islet-$\beta$ cells, leading to a lack of insulin and elevated blood glucose levels\cite{katsarouType1Diabetes2017}. Unlike \textit{monogenic} diseases -- such as sickle cell disease or cystic fibrosis, which result from variation within a single gene and are relatively rare -- \textit{complex} diseases are influenced by multiple chromosomal regions containing genetic variation, known as loci \cite{MonogenicDisorderOverview}. The natural history of T1D is believed to follow a continuous progression, beginning with the appearance of islet autoantibodies, followed by $\beta$-cell destruction, the onset of dysglycemia, and ultimately, the manifestation of hyperglycemia-related symptoms. Its pre-clinical stage, known as Islet Autoimmunity (IA), is characterized by the presence of autoantibodies prior to clinical diagnosis \cite{katsarouType1Diabetes2017,onengut-gumuscuGeneticVariantsComplement2024}. However, the precise onset of IA remains somewhat ambiguous. The definition used by the Diabetes AutoImmunity Study in the Young (DAISY\cite{rewersNewbornScreeningHLA1996a}) cohort classifies IA as the presence of one or more islet autoantibodies on two or more consecutive visits, or a single autoantibody-positive visit followed by a Type 1 Diabetes diagnosis at the next visit \cite{frohnertLateonsetIsletAutoimmunity2017}.
 
 \begin{figure}[ht]
     \centering
@@ -247,7 +248,7 @@ Type 1 Diabetes (T1D) is a complex autoimmune disorder where the immune system e
     \label{fig:stages_t1d}
 \end{figure}
 \par
-Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising \cite{atkinsonType1Diabetes2014}, efforts to understand the pathogenesis and etiology of T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
+Often diagnosed in early childhood, T1D left untreated can result in serious complications such as diabetic ketoacidosis, a life-threatening condition. With the disease incidence rising \cite{atkinsonType1Diabetes2014}, efforts to understand the onset of IA and progression to T1D continue with the hopes of phase-specific therapeutic intervention to mitigate life-threatening complications, eliminate the burden of insulin pumps, and improve quality of life.
 
 \begin{figure}[ht]
     \centering
@@ -258,9 +259,9 @@ Often diagnosed in early childhood, T1D left untreated can result in serious com
 \end{figure}
 \par
 
-T1D is primarily considered a genetic disease, with environmental factors-—such as viral infections—potentially influencing disease progression and the onset of IA. Ongoing research continues to investigate the viral onset hypothesis and the role of the complement system, which is primarily encoded within the Human Leukocyte Antigen (HLA) region \cite{onengut-gumuscuGeneticVariantsComplement2024}. However, the focus of this research remains on genetic susceptibility.
+T1D is largely a genetic disease, with environmental factors-—such as viral infections—-potentially influencing disease progression and the onset of IA. Ongoing research continues to investigate the viral onset hypothesis and the role of the complement system, which is primarily encoded within the Human Leukocyte Antigen (HLA) region \cite{onengut-gumuscuGeneticVariantsComplement2024}. However, the focus of this research remains on genetic susceptibility.
 \par
-The HLA region represents the strongest and longest-known genetic risk factor for T1D. The first association between HLA and juvenile-onset T1D was reported in the early 1970s through serological HLA typing \cite{singalHistocompatibilityHLAAntigens1973}. This finding was later validated in the 1980s using targeted genetic association testing, which pinpointed specific HLA-DQB1 alleles as key determinants of T1D susceptibility \cite{toddHLADQBGeneContributes1987}. This highly polymorphic region has been associated with many other autoimmune diseases and constitutes roughly 40\% of the heritability of T1D\cite{onengut-gumuscuGeneticVariantsComplement2024}.
+The HLA region represents the strongest and longest-known genetic risk factor for T1D. The first association between HLA and juvenile-onset T1D was reported in the early 1970s through HLA typing of blood serum\cite{singalHistocompatibilityHLAAntigens1973}. This finding was later validated in the 1980s using targeted genetic association testing, which pinpointed specific HLA-DQB1 alleles as key determinants of T1D susceptibility \cite{toddHLADQBGeneContributes1987}. This highly polymorphic region has been associated with many other autoimmune diseases and constitutes roughly 40\% of T1D \textit{heritability}\cite{onengut-gumuscuGeneticVariantsComplement2024}--that is, 40\% of the variance in T1D status within the population that can be attributed to genetic factors.
 \par
 Despite decades of research, questions about the genetic architecture of T1D remain. Over 60 candidate loci, collectively explaining roughly 80\% of the heritability\cite{pangMissingHeritabilityType2022}, have been identified with respect to T1D. However, this leaves approximately 20\% of heritability unexplained, a phenomenon known as the missing heritability problem. Addressing this gap requires further investigation into rare variants, common variants with small effect sizes, and gene-gene interactions (epistasis)\cite{pangMissingHeritabilityType2022,roseEpistasisImmunityRole2012}.
 \begin{figure}[ht]
@@ -277,7 +278,7 @@ Despite decades of research, questions about the genetic architecture of T1D rem
 \label{sec:epi}
 \textit{Epistasis} has been defined and redefined many times since its coinage by Bateson in 1909, often leading to ambiguity in its definition. Seldom mentioned, however, is that Bateson also defined the term \textit{hypostasis} \cite{batesonMendelsPrinciplesHeredity1909,cordellEpistasisWhatIt2002}. These two terms were initially meant to describe a hierarchical relationship where a higher-level factor (epistatic gene/allele) controls whether a lower-level factor (hypostatic gene/allele) can be expressed. Here, \textit{epistatic} and \textit{hypostatic} derive from the Greek prefixes \textit{epi} meaning "upon", \textit{hypo} meaning "under", and root \textit{stasis} meaning "standing". Thus, to Bateson, an epistatic gene "stands upon" a hypostatic gene, masking the hypostatic gene's expression. 
 \par
-Epistasis, or \textit{dual epistacy}, was redefined under a statistical context by Fisher in 1918 as a deviation from linearity in allelic effects with respect to some quantitative phenotype $D$ \cite{cordellEpistasisWhatIt2002,fisherXVTheCorrelationRelatives1919}. Here, we already see differing definitions of epistasis emerging just 9 years apart, each carrying distinct implications. While Fisherian statistical epistasis does not necessarily imply biological or functional epistasis, it provides a framework for detecting genetic interactions that warrant further investigation. The modern definition of epistasis is largely an umbrella term for genetic interaction. Under this umbrella, we find the term \textit{positive/negative epistasis}, which refers to the interaction between genetic variants where positive (negative) epistasis occurs when their combined effect on a trait or disease risk is greater (less) than the sum of their individual effects. At the population level, this deviation from additivity plays a crucial role in shaping genetic architecture and disease susceptibility \cite{johnsonEpistasisEvolutionRecent2023}.
+Epistasis, or \textit{dual epistacy}, was redefined under a statistical context by Fisher in 1918 as a deviation from linearity in allelic effects with respect to some quantitative phenotype $D$ \cite{cordellEpistasisWhatIt2002,fisherXVTheCorrelationRelatives1919}. Here, we already see differing definitions of epistasis emerging just 9 years apart, each carrying distinct implications. While Fisherian epistasis does not necessarily imply biological or functional epistasis, it provides a framework for detecting genetic interactions that warrant further investigation. The modern definition of epistasis is largely an umbrella term for genetic interaction. Under this umbrella, we find the term \textit{positive/negative epistasis}, which refers to the interaction between genetic variants where positive (negative) epistasis occurs when their combined effect on a trait or disease risk is greater (less) than the sum of their individual effects. At the population level, this deviation from additivity plays a crucial role in shaping genetic architecture and disease susceptibility \cite{johnsonEpistasisEvolutionRecent2023}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{epistasis.jpg}
@@ -290,11 +291,11 @@ Genome-wide association studies (GWAS) are a modern approach to discover genetic
 \par
 There are issues with this standard of practice. The standard genome-wide significance threshold faces challenges in evolving GWAS practices. It was developed for common variants, potentially lacking power for rare variants. It does not take into account the prior probability of a variant being associated with a phenotype, nor does it account for the statistical power of the test which both influence the interpretation of the $p$-value. These oversights can distort results, particularly when considering epistasis, where interactions between variants may not align with assumptions of independence and testing SNPs in pairs or tuples of length $n$ drastically increase the already large number of hypotheses. Applying the standard threshold universally risks missing meaningful associations while inflating false positives, especially in diverse populations or complex phenotypes\cite{jiangBayesianMethodEvaluating2011,shamStatisticalPowerSignificance2014}.
 \par
-Genome-wide association interaction (GWAI) studies are an extension of GWAS aimed at epistasis detection\cite{bessonovCautionaryNoteImpact2015,gusarevaPracticalAspectsGenomewide2014}. There are two categories of methods that emerge when considering GWAI: exhaustive and non-exhaustive\cite{gusarevaPracticalAspectsGenomewide2014}. Non-exhaustive methods avoid the challenge of multiple testing correction by limiting the analysis in some way. Typically, these analyses determine candidate genes a prior to test, use GWAS results to look at interactions between significant SNPs overlooking those SNPs with small effects with potentially large interaction effects, or use some sort of dimensionality reduction\cite{gusarevaPracticalAspectsGenomewide2014,anChallengeDetectingEpistasis2009}. To address the burden of multiple testing in exhaustive approaches, Bayesian methods have been recommended for both GWAS and GWAI\cite{jiangBayesianMethodEvaluating2011,stephensBayesianStatisticalMethods2009,lopezBayesianStatisticalMethods,zhouPolygenicModelingBayesian2013,shamStatisticalPowerSignificance2014}.
+Genome-wide association interaction (GWAI) studies are an extension of GWAS aimed at epistasis detection\cite{bessonovCautionaryNoteImpact2015,gusarevaPracticalAspectsGenomewide2014}. There are two categories of methods that emerge when considering GWAI: exhaustive and non-exhaustive\cite{gusarevaPracticalAspectsGenomewide2014}. Non-exhaustive methods avoid the challenge of multiple testing correction by limiting the analysis in some way. Typically, these analyses determine candidate genes a priori, use GWAS results to look at interactions between significant SNPs overlooking those SNPs with small effects with potentially large interaction effects, or use some sort of dimensionality reduction\cite{gusarevaPracticalAspectsGenomewide2014,anChallengeDetectingEpistasis2009}. To address the burden of multiple testing in exhaustive approaches, Bayesian methods have been recommended for both GWAS and GWAI\cite{jiangBayesianMethodEvaluating2011,stephensBayesianStatisticalMethods2009,lopezBayesianStatisticalMethods,zhouPolygenicModelingBayesian2013,shamStatisticalPowerSignificance2014}.
 
 \subsection{Bayesian Statistics}
 \label{sec:bayes}
-Bayesian statistics is named after Reverend Thomas Bayes, a part-time mathematician who was among the first recorded individuals to attempt solving the problem of inverse probability\cite{shoemakerBayesianStatisticsGenetics1999,gelmanBayesianDataAnalysisa}. Inverse probability seeks to determine the probability of a cause given an observed outcome as opposed to classical probability which estimates the likelihood of an event given known conditions. In Bayes' work that was posthumously communicated by his friend and colleague Richard Price, he posed the problem 
+Bayesian statistics is named after Reverend Thomas Bayes, a part-time mathematician who was among the first recorded to attempt solving the problem of inverse probability\cite{shoemakerBayesianStatisticsGenetics1999,gelmanBayesianDataAnalysisa}. Inverse probability seeks to determine the probability of a cause given an observed outcome as opposed to classical probability which estimates the likelihood of an event given known conditions. In Bayes' work, that was posthumously communicated by his friend and colleague Richard Price, he posed the problem 
 \begin{quote}
     "\textit{Given} the number of times in which an unknown event has happened and failed: 
     \textit{Required} the chance that the probability of its happening in a single trial lies 
@@ -304,11 +305,11 @@ Bayesian statistics is named after Reverend Thomas Bayes, a part-time mathematic
 \noindent
 Bayes' original work did not explicitly introduce what we now know as Bayes' theorem:
 $$p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}$$
-This was instead formulated by Laplace. Bayes' contribution was rather the concept of compromising prior information, $p(\theta)$, with information from observed data, $p(y \mid \theta)$. He introduces this concept with an analogy to a billiard table where he considers a scenario where a ball is randomly thrown onto a unit interval, and the goal is to estimate the probability of a future event occuring based on where the ball landed. Bayes introduced what we would now call a uniform prior distribution on $\theta$ such that $\theta$ was modeled as the probability parameter of a binomial distribution\cite{bayesLIIEssaySolving1997,fienbergWhenDidBayesian2006}. 
+This was instead formulated by Pierre-Simon Laplace. Bayes' contribution was rather the concept of compromising prior information, $p(\theta)$, with information from observed data, $p(y \mid \theta)$. He introduces this concept with an analogy to a billiard table where he considers a scenario where a ball is randomly thrown onto a unit interval, and the goal is to estimate the probability of a future event occuring based on where the ball landed. Bayes introduced what we would now call a uniform prior distribution on $\theta$ such that $\theta$ was modeled as the probability parameter of a binomial distribution\cite{bayesLIIEssaySolving1997,fienbergWhenDidBayesian2006}. 
 \par
-In population genetics, the classical frequentist approach to discovering associations with a phenotype typically involves computing the $p$-value for the null hypothesis ($H_0$) of no association. Despite our desire to interpret the $p$-value as the probability of $H_0$ being true (i.e. $p$-value $< 0.05$ implying significance through rejecting the null in favor of the alternative hypothesis $H_1$), this is simply not the case. The $p$-value relies not only on the how unlikely it is under $H_0$ but also how unlikely it is under $H_1$ which differs from study to study due to differences in power and measures the extremeness of the result under the null\cite{lesaffreBayesianBiostatistics2012}. A fundamental limitation of the $p$-value aside from its comparability across studies is that with-in a study, two genetic associations with equivalent $p$-values may have different levels of true association due to underlying factors such as minor allele frequency (MAF) which is the frequency of the non-dominant allele in the reference population. Some of these limitations can be addressed using the Bayesian framework, although doing so comes at the cost of increased modeling assumptions\cite{stephensBayesianStatisticalMethods2009}. 
+In population genetics, the classical frequentist approach to discovering associations with a phenotype typically involves computing the $p$-value for the null hypothesis ($H_0$) of no association. Despite our desire to interpret the $p$-value as the probability of $H_0$ being true (i.e. $p$-value $< 0.05$ implying significance through rejecting the null in favor of the alternative hypothesis $H_1$), this is simply not the case. The $p$-value relies not only on the how unlikely it is under $H_0$ but also how unlikely it is under $H_1$ which differs from study to study due to differences in power and measures the extremeness of the result under the null\cite{lesaffreBayesianBiostatistics2012}. A fundamental limitation of the $p$-value aside from its comparability across studies is that with-in a study, two genetic associations with equivalent $p$-values may have different levels of true association due to underlying factors such as minor allele frequency (MAF) which is the frequency of the non-dominant allele in the reference population. Some of these limitations can be addressed using the Bayesian framework, although doing so comes at the cost of increased modeling assumptions and often times computation complexity\cite{stephensBayesianStatisticalMethods2009}. 
 \par
-Modern Bayesian approaches incorporate prior probabilities and probabilistic modeling to improve statistical power and control false positives. In the context of a frequentist GWAS, the number of comparisons needs to be corrected for. The Bayesian perspective avoids this requirement as the $p$-value analogue is the \textit{posterior probability}, $P(H_0 = \text{TRUE} \mid \text{Data})$, and is truly interpreted as a probability of true association conditioned on the observed data\cite{lesaffreBayesianBiostatistics2012}.
+Modern Bayesian approaches incorporate prior probabilities and probabilistic modeling to improve statistical power and control false positives. In the context of a frequentist GWAS, the number of comparisons needs to be corrected for. The Bayesian perspective circumvents this requirement as the $p$-value analogue is the \textit{posterior probability}, $P(H_0 = \text{TRUE} \mid \text{Data})$, and is truly interpreted as a probability of true association conditioned on the observed data\cite{lesaffreBayesianBiostatistics2012}.
 
 \subsection{Motivation}
 \label{sec:motiv}
@@ -322,18 +323,29 @@ Bayesian methods offer a compelling alternative. They are not only well-suited f
 GWAI studies have been relatively understudied in T1D and the methods for epistasis detection continue to evolve along with computational ability. We extend the work of \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022} and apply this extended method to IA, with the goal of elucidating the epistatic landscape that may shape the early progression of T1D.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+% \newpage
 \section{Methodology}
 \label{sec:meth}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Overview}
 \label{sec:meth-over}
-Within-gene synergy networks were used to capture non-linear epistatic effects in the DAISY cohort and summarized through diffusion kernel principal components (kPCs). Between-gene epistasis was detected through a Bayesian interaction analysis of kPC-summarized genes. Gene pairs with evidence of interaction were then included pairwise in an intelligable Random Forest known as Explainable Boost Machine (EBM) at the SNP level to identify SNPs contributing to IA interacting across genes.
+
+To uncover the complex genetic interactions underlying IA in DAISY children, we altered the multi-stage analytic framework integrating information theory, graph-based modeling, and Bayesian nonlinear interaction analysis from \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022}. Within-gene epistasis is quantified using an information-theoretic synergy score, capturing non-additive effects between SNP pairs. We then summarize each gene’s internal epistatic landscape by constructing a synergy matrix and applying diffusion kernel principal component analysis (kPCA) to derive new gene-level features.
+\par
+These non-linear summaries serve as inputs to a hierarchical Bayesian interaction model that was restricted to intra-chromosomal gene pairs, allowing us to flexibly capture gene-gene interactions while controlling for lower-order effects in a computationally feasible way. To further refine our focus, we identify high-priority genes and gene pairs based on their membership in top-ranked pathways from an Over-Representation Analysis (ORA) conducted using FUMA\cite{watanabeFunctionalMappingAnnotation2017}. We then revisit the SNP level within these prioritized regions and construct interaction networks to highlight specific variants that may drive gene-level epistatic signals relevant to IA.
 
 \subsection{Data Preparation}
 \label{sec:dataprep}
-After quality control, 359 DAISY children selected for nested case-control study with a customized Exome array imputed to the TOPMed r2 reference panel were included for analysis of genome-wide epistasis detection.  
+\subsubsection{DAISY}
+The Diabetes Autoimmunity Study in the Young (DAISY) is a longitudinal birth cohort established in Denver, Colorado to investigate the genetic and environmental determinants of IA and progression to T1D in children. Children with high- or moderate-risk HLA genotypes were enrolled and followed prospectively for the development of islet autoantibodies and diabetes\cite{rewersNewbornScreeningHLA1996a}.
+
+\subsubsection{Quality Control}
+Quality control (QC) and data preprocessing were performed in three stages across various institutions: initial genotype QC and sex-check filtering were completed by a group at the University of Virgina; imputation to the TOPMed reference panel was conducted by Sarah D. Slack; and final QC was performed specifically for the study of epistasis which involves a more strict LD pruning threshold\cite{bessonovCautionaryNoteImpact2015}.
+\par
+Genotype data were initially available for 745 DAISY children with 622,925 SNPs. SNPs with low call rates (<80\%), monomorphic sites, and samples with missingness >5\% were removed, resulting in 744 individuals and 446,557 high-quality SNPs. Additional filters addressed sex discrepancies and sex chromosome anomalies, removing mislabeled or ambiguous samples and problematic X/Y chromosome variants, yielding 741 individuals and 445,541 SNPs. Hardy-Weinberg equilibrium filtering ($P < 1\times 10^{-6}$ and $P < 1\times 10^{-20}$ for the MHC region) was applied, followed by imputation to the TOPMed r2 reference panel, expanding the variant set to 9,773,672 SNPs.
+\par
+The dataset was then subset to 409 DAISY participants with IA phenotype data available. Further sample level QC steps removed related individuals (in KING\cite{manichaikulRobustRelationshipInference2010,SecondgenerationPLINKRising} with a \textit{-king-cutoff} $= 0.177$), individuals with abnormal heterozygosity ($|F|>0.1$), and ethnic outliers identified via PCA. Strict linkage disequilibrium (LD) pruning (\textit{--indep-pairwise 50 5 0.2} and \textit{--indep-pairwise 50 5 0.5} for \textit{CSMD1} due to its size) was applied in PLINK2\cite{SecondgenerationPLINKRising} to remove redundancy, retaining 1,627,974 variants. Finally, SNPs were annotated to the gene level using ANNOVAR\cite{ANNOVARFunctionalAnnotation}, and only those with valid mappings to the hg19 reference genome were kept. This resulted in a final dataset of 359 individuals, 685,455 annotated SNPs, and 20859 genes for downstream analysis.
 
 \begin{table}[ht]
 \centering
@@ -346,6 +358,7 @@ Summary of sex, ethnicity (Non-Hispanic White), and HLA-DR3/DR4 genotype status,
 
 \subsection{Summarizing Within-Gene Epistasis}
 \label{sec:sum-within}
+\subsubsection{Overview}
 To model complex \textit{within-gene} SNP interactions that contribute to IA in DAISY children, we build from foundational concepts in information theory, such as entropy and mutual information, to quantify the epistatic contribution of SNP combinations. Using these quantities, we define pairwise synergy between SNPs and construct gene-specific synergy matrices reflecting potential non-linear effects. We then leverage the graph-theoretic properties associated with the Laplacian to model information flow across SNP-level interaction networks using diffusion kernels. Finally, by applying diffusion kernel principal component analysis (kPCA), we summarize each gene’s within-gene epistatic architecture as a single, non-linear gene-level feature for downstream between-gene epistasis analysis.
 
 \subsubsection{Entropy}
@@ -373,7 +386,7 @@ Claude Shannon, the father of information theory\cite{saraivaShannonEntropyIts20
   child { node[circle, fill=black, inner sep=0pt, minimum size=4pt] {} 
           edge from parent node[above] {$\frac{1}{2}$} };
 
-% Right tree - shifted using xshift
+% Right tree
 \begin{scope}[xshift=4.5cm]
   \node[circle, fill=black, inner sep=0pt, minimum size=4pt] {}
     child { node[circle, fill=black, inner sep=0pt, minimum size=4pt] {}
@@ -413,7 +426,7 @@ If we let $p_1 = p$ and $p_2 = 1-p$ then we can write:
 $$E[S(A)] = \sum\limits_{i=1}^2 p_i \log(\frac{1}{p_i}) = H.$$
 Thus, entropy can be interpreted as the average surprise or the expected uncertainty of an outcome.
 \end{proof}
-The figure below illustrates the entropy $H(p)$, or expected uncertainty, as a function of the probability $p$ of an event $A$. Note the maximum entropy occurs when $p=0.5$. As $p\to 0$ and $p\to 1$ the event is more predictable and thus the entropy approaches 0. 
+The figure below illustrates the entropy $H(p)$, or expected uncertainty, as a function of the probability $p$ of $A$. Note the maximum entropy occurs when $p=0.5$. As $p\to 0$ and $p\to 1$ the event is more predictable and thus the entropy approaches 0. 
 \begin{figure}[ht]
 \centering
 \includegraphics{Masters-Thesis-entropy}
@@ -427,7 +440,7 @@ A natural extension is to consider the joint entropy of multiple events $X \in \
 H(X,Y) = \sum\limits_{\mathcal{X},\mathcal{Y}}p(X,Y)\log(\frac{1}{p(X,Y)})
 \label{eq:joint_entropy}
 \end{equation}
-where $H(X,Y) \le H(X) + H(Y)$ with equality occuring if the event $X$ and $Y$ are independent such that $p(X,Y)=p(X)p(Y)\cite{shannonMathematicalTheoryCommunication}$. Another natural extension is then to define the conditional entropy of $X$ given $Y$: 
+where $H(X,Y) \le H(X) + H(Y)$ with equality occurring if the event $X$ and $Y$ are independent such that $p(X,Y)=p(X)p(Y)\cite{shannonMathematicalTheoryCommunication}$. Another natural extension is then to define the conditional entropy of $X$ given $Y$: 
 \begin{equation}
 H(X\mid Y) = \sum_{\mathcal{X},\mathcal{Y}}p(X,Y)\log(\frac{1}{p(X\mid Y)}) = H(X,Y) - H(X)
 \label{eq:cond_entropy}
@@ -478,7 +491,7 @@ The relationship between {\bf Joint Entropy}, {\bf Entropy} or Marginal Entropy,
 \end{figure}
 \subsubsection{Mutual Information}
 \label{sec:mutual}
-We now have a measure of the expected uncertainty associated with an event—namely, entropy—as well as a means of quantifying uncertainty in the presence of a dependent event, via conditional entropy. Figure~\ref{fig:entropy_relationship} highlights the overlap in information being communicated from both events when they depend on one another. We can quantify this redundancy as \textit{mutual information}, denoted:
+We now have a measure of the expected uncertainty associated with an event--namely, entropy--as well as a means of quantifying uncertainty in the presence of a dependent event, via conditional entropy. Figure~\ref{fig:entropy_relationship} highlights the overlap in information being communicated from both events when they depend on one another. We can quantify this redundancy as \textit{mutual information}, denoted:
 $$I(X;Y) \equiv H(X) - H(X\mid Y) = H(Y) - H(Y\mid X) \equiv I(Y;X).$$
 Note that $I(X;Y) \ge 0$ as $H(X\mid Y) \le H(X)$. This measures the average reduction in uncertainty about $X$ that results from having information about $Y$ or can equivalently be thought of as the average information gain when knowing information about both events as highlighted in Figure~\ref{fig:mutinfo_relationship}\cite{mackayInformationTheoryInference,walakiraDetectingGeneGene2022,huCharacterizingGeneticInteractions2011}.
 \begin{figure}[ht]
@@ -602,7 +615,7 @@ $$ or alternatively
 \label{sec:dkpc}
 The Laplacian matrix has an intimate connection the \textit{heat equation} presented in physics that describes how heat and other diffusing quantities spread through a medium. Diffusion kernels are often referred to as "heat" kernels due to it being the fundamental solution to the \textit{heat equation}\cite{chungSpectralGraphTheory1997,kondorDiffusionKernelsGraphs}:
 $$\frac{\partial u}{\partial t} = -\mathcal{L}u.$$
-Applied to graphs, diffusion can be thought of as the spread of information from node to node. Imagine a graph or network where the edges and nodes are made of metal. If we apply enough heat to one node so that visibly see the metal turn red, we can watch as the heat transfers from the node to which it was applied to its neighbors. This captures the spread of information to its direct neighbors as well as its indirect neighbors as depicted in Figure~\ref{fig:diffusion}. The \textit{kernel} summarizes this diffusion of information between nodes\cite{liOutofDistributionNodeDetection2024}.
+Applied to graphs, diffusion can be thought of as the spread of information from node to node. Imagine a graph or network where the edges and nodes are made of metal. If we apply enough heat to one node so that we can visibly see the metal turn red, we can watch as the heat transfers from the node to which it was applied to its neighbors. This captures the spread of information to its direct neighbors as well as its indirect neighbors as depicted in Figure~\ref{fig:diffusion}. The \textit{kernel} summarizes this diffusion of information between nodes\cite{liOutofDistributionNodeDetection2024}.
 
 \begin{figure}[ht]
 \centering
@@ -636,36 +649,9 @@ where $G$ is an $n\times p$ genotype matrix for gene $g$, with $n$ individuals a
 
 \subsection{Between-Gene Epistasis Detection}
 \label{sec:between-geen}
-To model complex \textit{between-gene} interactions that contribute to IA in DAISY children, we transition from information-theoretic approaches to a \textit{Bayesian semi-parametric}\cite{antonelliEstimatingHealthEffects2019,walakiraDetectingGeneGene2022} framework implemented in the NLinteraction\cite{antonelliEstimatingHealthEffects2019} R package. This enables flexible modeling of non-linear gene-gene interactions while maintaining interpretability and mitigating the burden of hypothesis correction during discovery. After discovering which genes have evidence for pairwise interaction, we reintroduce the SNP-level data into an Explainable Boost Machine\cite{louAccurateIntelligibleModels2013} (EBM) Random Forest to pinpoint specific variants driving cross-gene interactions contributing to IA. 
+To model complex \textit{between-gene} interactions that contribute to IA in DAISY children, we restrict our analysis to intra-chromosomal gene-pairs. The motivation behind this is purely computational and chromosomes serve as a natural biological partition. Determining all combinations of gene-pairs genome-wide was intractable. While there is literature to support searching for inter-chromosomal interactions, this analysis will focus on intra-chromosomal gene-gene interactions.
 \par
-However, before the explicit modeling of genes and gene-pairs, a summary measure for chromosomes was made using Gaussian Process regression so that a non-linear, phenotype informed summary measure could be formed. This summary measure was then subject to the same Bayesian Interaction model to discover and rank the importance of chromosomal pairs in relation to IA. This was conducted as a means to reduce the feature space. The Bayesian Interaction model at the gene level will only be run on chromosomal pairs found to have evidence of inter-chromosomal interaction rather than exhaustively evaluating all possible gene-pairs across the genome. 
-
-\subsubsection{Gaussion Process Regression}
-Gaussian Process regression (GPR) was used to generate a non-linear, phenotype-aware summary of gene variation for each chromosome. This approach enables the construction of a single, continuous latent feature per chromosome that captures complex genetic patterns associated with the phenotype, beyond what can be captured through linear dimensionality reduction methods such as PCA.
-
-Let $X^{(c)}$ be the standardized genotype matrix for chromosome $c$, with individuals indexed by $i = 1, \dots, n$ and SNPs indexed by $j = 1, \dots, p_c$. The ancestry-corrected phenotype vector is denoted $Y \in \mathbb{R}^n$. GPR models the conditional distribution of $Y$ given $X^{(c)}$ as a realization of a multivariate Gaussian:
-
-\begin{equation}
-Y \sim \mathcal{N}(0, K^{(c)}),
-\end{equation}
-
-where $K^{(c)}$ is the $n \times n$ kernel matrix capturing pairwise similarity between individuals based on their genotype profiles on chromosome $c$. We use the Radial Basis Function (RBF) kernel, also known as the squared exponential kernel, defined as:
-
-\begin{equation}
-K_{ij}^{(c)} = \exp(-\frac{\| X^{(c)}_i - X^{(c)}_j \|^2}{2\sigma^2})
-\end{equation}
-
-where $X^{(c)}_i$ and $X^{(c)}_j$ are the genotype vectors of individuals $i$ and $j$, and $\sigma$ is a parameter controlling the smoothness of the kernel.
-
-To extract a one-dimensional summary for each chromosome, we compute the posterior mean of the latent function $f^{(c)}$ under the GP model:
-
-\begin{equation}
-\hat{f}^{(c)} = K^{(c)} (K^{(c)} + \lambda I)^{-1} Y
-\end{equation}
-
-where $\lambda$ is a regularization parameter to account for noise. The resulting vector $\hat{f}^{(c)} \in \mathbb{R}^n$ represents a non-linear, phenotype-informed summary feature for chromosome $c$, which is then used as the input to the Bayesian interaction model described in Section~\ref{sec:bim}.
-
-This dimensionality reduction procedure allows us to retain biologically relevant signal while reducing the computational burden of modeling all gene-pairs directly, and only considering gene-pairs among chromosomal-pairs with evidence of interaction, rather than exhaustively evaluating all possible gene-pairs genome-wide.
+We transition from information-theoretic approaches to a \textit{Bayesian semi-parametric}\cite{antonelliEstimatingHealthEffects2019,walakiraDetectingGeneGene2022} framework, implemented in the NLinteraction\cite{antonelliEstimatingHealthEffects2019} R package. This enables flexible modeling of non-linear intra-chromosomal gene-gene interactions while maintaining interpretability and mitigating the burden of hypothesis correction during discovery. After identifying gene pairs with evidence of interaction, we reintroduce SNP-level data into the Synergy matrix $\mathbf{S}$, from Section~\ref{sec:withingene}, to pinpoint specific variants driving both cross-gene and within-gene epistatic effects contributing to IA.
 
 \subsubsection{Bayesian Interaction Modeling}
 \label{sec:bim}
@@ -685,7 +671,7 @@ To flexibly model smooth, non-linear relationships (see Figure~\ref{fig:splines}
 An illustration of natural spline smoothing applied to noisy, non-linear data. The gray points represent raw observations, while the blue curve shows the flexible fit obtained using natural spline basis functions. This demonstrates how splines can capture complex, multi-modal relationships without requiring a parametric form. As the degrees of freedom (df) in $ns(\cdot)$ increase, the fitted line becomes more flexible and approaches interpolation of the data, at the cost of smoothness.}
 \label{fig:splines}
 \end{figure}
-The Bayesian model formulation makes the assumption of a normally distributed response. However, the binary phenotype (IA vs. non-IA) was residualized using the first seven ancestry principal components, following the recommendation of Walakira et al.\cite{walakiraDetectingGeneGene2022}. While this approach does not strictly satisfy the model assumptions, prior work\cite{pirinenEfficientComputationLinear2013} supports it as a computationally efficient approximation. Since our goal is not to perform direct inference, but rather to prioritize or rank genes and gene pairs for further investigation, this approximation is considered sufficient for discovery-oriented analysis.
+The Bayesian model formulation makes the assumption of a normally distributed response. However, the binary phenotype (IA vs. non-IA) was residualized using the first seven ancestry principal components, following the recommendation of \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022}. While this approach does not strictly satisfy the model assumptions, prior work\cite{pirinenEfficientComputationLinear2013} supports it as a computationally efficient approximation. Since our goal is not to perform direct inference, but rather to prioritize or rank genes and gene pairs for further investigation, this approximation is considered sufficient for discovery-oriented analysis.
 \par
 Let $Y$ be the ancestry corrected phenotype, $p$ be the number of genes, i.e., $|\mathcal{G}| = p$, and let $k$ be a number sufficiently large such that all gene effects can be captured by the model. We assume the corrected phenotype is drawn from a normal distribution centered around a complex, nonlinear function of the genes:
 
@@ -733,36 +719,34 @@ where $\tau_h$ is the prior probability of a gene or gene-pair being included in
 \end{equation}
 with $M$ and $\gamma$ fixed to control sparsity. We set $\gamma = p$, the total number of genes considered.
 \par
-This modeling framework allows us to prioritize genes and gene-pairs that are contributors to IA in DAISY children while naturally handling both non-linear effects and higher-order interactions. The use of natural splines introduces flexibility, while the spike-and-slab prior ensures sparsity and interpretability—only genes and interactions with substantial evidence are retained.
+This modeling framework allows us to prioritize genes and gene-pairs that are contributors to IA in DAISY children while naturally handling both non-linear effects and higher-order interactions. The use of natural splines introduces flexibility, while the spike-and-slab prior ensures sparsity and interpretability by selectively retaining only genes and interactions with substantial evidence.
 \par
-Importantly, this framework is hierarchical: after identifying informative chromosomes and chromosomal interactions, we can restrict the gene-level interaction model to only relevant chromosomal pairs. This two-stage approach melds the need for computational feasibility with a natural biological partition, enabling genome-scale modeling without exhaustively evaluating all gene-gene combinations.
+Importantly, this framework is hierarchical: we restrict the gene-level interaction model within each autosomomal chromosome (1-22). This two-stage approach melds the need for computational feasibility with a natural biological partition, enabling genome-scale modeling without exhaustively evaluating all gene-gene combinations.
 \par
-The resulting posterior inclusion probabilities (PIPs) serve as importance scores. This procedure offers a discovery-oriented path for understanding the polygenic, interactive architecture of IA risk in DAISY children, allowing for focused downstream analysis of variant-level contributions within prioritized gene-gene interactions.
-\subsection{Prioritized Gene-Pair SNP Synergies}
-\label{sec:gpair-syn}
-To further investigate the fine-scale genetic architecture of gene-gene interactions, we construct a synergy matrix $\mathbf{S}$ for each gene pair ${g_1, g_2}$ identified in Section~\ref{sec:bim} as interacting. Similar to Section~\ref{sec:withingene}, each matrix $\mathbf{S}$ encodes the pairwise synergy between SNPs $i$ and $j$, where $i \ne j$ and both $i$ and $j$ belong to the union of SNPs mapped to genes $g_1 \in \mathcal{G}_1$ and $g_2 \in \mathcal{G}_2$. That is, $i,j \in \mathcal{S}_1 \cup \mathcal{S}_2 = \mathcal{S}_{sub}$, where $\mathcal{S}_1, \mathcal{S}_2 \subset \mathcal{S}$ and $\mathcal{S}_1 \mapsto \mathcal{G}_1$, $\mathcal{S}_2 \mapsto \mathcal{G}_2$, with $\mathcal{G}_1, \mathcal{G}_2 \subset \mathcal{G}$.
+The resulting posterior inclusion probabilities (PIPs) serve as importance scores. This procedure offers a discovery-oriented path for understanding the polygenic, interactive architecture of IA risk in DAISY children, allowing for focused downstream analysis of variant-level contributions within prioritized genes and gene-gene interactions.
 
-Each entry $S_{ij}$ quantifies the pairwise epistatic interaction strength—captured as synergy—between SNPs $i$ and $j$ with respect to the disease phenotype. This enables the identification of specific variant combinations that may underlie the observed gene-level interaction signal. 
+\subsection{Over-Representation Analysis}
+To prioritize genes and gene-pairs identified by the Bayesian interaction model, we performed Over-Representation Analysis (ORA) using FUMA\cite{watanabeFunctionalMappingAnnotation2017}. ORA enables the identification of biological processes, pathways, and molecular functions that are statistically overrepresented among the high-priority genes, relative to a reference background. This approach offers biological interpretability by linking statistical evidence of interaction to known functional annotations. By mapping gene-level signals to higher-order biological functions, we aim to uncover pathways potentially enriched for nonlinear genetic interactions contributing to IA. Enrichment results were filtered at an FDR-adjusted $p$-value threshold of $0.1$, and top pathways were examined for relevance to immune regulation, pancreatic islet biology, and autoimmune disease mechanisms. The results of the ORA will provide an independent layer of biological validation for the statistical model outputs and guide the selection of genes and gene-pairs for downstream SNP-level epistasis visualization.
+
+\subsection{Prioritized SNP Synergies}
+\label{sec:gpair-syn}
+To further investigate the fine-scale genetic architecture of gene-gene interactions, we construct a synergy matrix $\mathbf{S}$ for each gene-pair ${g_1, g_2}$ identified in Section~\ref{sec:bim} as interacting. Similar to Section~\ref{sec:withingene}, each matrix $\mathbf{S}$ encodes the pairwise synergy between SNPs $i$ and $j$, where $i \ne j$ and both $i$ and $j$ belong to the union of SNPs mapped to genes $g_1 \in \mathcal{G}_1$ and $g_2 \in \mathcal{G}_2$. That is, $i,j \in \mathcal{S}_1 \cup \mathcal{S}_2 = \mathcal{S}_{sub}$, where $\mathcal{S}_1, \mathcal{S}_2 \subset \mathcal{S}$ and $\mathcal{S}_1 \mapsto \mathcal{G}_1$, $\mathcal{S}_2 \mapsto \mathcal{G}_2$, with $\mathcal{G}_1, \mathcal{G}_2 \subset \mathcal{G}$.
+
+Each entry $S_{ij}$ quantifies the pairwise epistatic interaction strength-captured as synergy-between SNPs $i$ and $j$ with respect to the disease phenotype. This enables the identification of specific variant combinations that may underlie the observed gene-level interaction signal. 
 \par
-To visualize and further explore these interactions, we construct a graph $G = (V, E)$ for each gene pair, where nodes $V$ represent SNPs and edge weights $E$ are determined by the corresponding synergy scores $S_{ij}$. A central challenge in this framework is deciding which edges to include in the graph: while statistical approaches such as permutation testing could be used to assess significance, such methods would require thousands of permutations per SNP pair and are therefore computationally intractable for  discovery even within gene-pairs.
+To visualize and further explore these interactions, we construct a graph $G = (V, E)$ for each gene pair, where nodes $V$ represent SNPs and edge weights $E$ are determined by the corresponding synergy scores $S_{ij}$. A central challenge in this framework is deciding which edges to include in the graph: while statistical approaches such as permutation testing could be used to assess significance, such methods would require thousands of permutations per SNP pair and are therefore computationally intractable for discovery even within gene-pairs.
 \par
-As a pragmatic alternative, we define edge inclusion based on quantile thresholds of the synergy distribution. Specifically, we include edges whose synergy magnitude exceeds the $1-\alpha$ quantile, thereby prioritizing SNP pairs with the strongest epistatic signals—whether positive or negative. We set $\alpha = 0.1$ to focus on the top 10\% most extreme interactions. While this approach does not explicitly model statistical significance, it enables interpretable and scalable exploration of variant-level interactions, and lays the foundation for future work incorporating rigorous uncertainty quantification.
-% \subsubsection{Minimal Redundancy Maximal Relevance}
-% \label{sec:mrnet}
-% 
-% We define \textit{relevance}\cite{hanchuanpengFeatureSelectionBased2005} of a SNP $x_i \in \mathcal{S}_{sub}$ to the disease $D$ using mutual information $I(x_i;D)$ characterizing how much having information about SNP $x_i$ decreases the uncertainty in the disease $D$. Relevance is then defined as the the average reduction in uncertainty about $D$.
-% \begin{equation}
-% \max Rel(\mathcal{S}_{sub},D), Rel= \frac{1}{|\mathcal{S}_{sub}|} \sum_{x_i \in \mathcal{S}_{sub}}I(x_i;D)
-% \end{equation}
-% However, selecting only the most individually relevant SNPs can lead to \textit{redundancy}\cite{hanchuanpengFeatureSelectionBased2005} in that SNPs may be collinear, or in linkage disequilibrium (LD). To mitigate redundancy, we penalize the selection of SNPs that share mutual information with each other.
-% \begin{equation}
-% \min Red(\mathcal{S}_{sub}), Red= \frac{1}{|\mathcal{S}_{sub}|^2} \sum{x_i,x_j \in \mathcal{S}_{sub}} I(x_i;x_j)
-% \end{equation}
-% Finding a balance between maximizing \textit{relevance} and minimizing \textit{redundancy} equates to maximizing their difference:
-% \begin{equation}
-% \max \phi(Rel,Red), \phi = Rel - Red
-% \end{equation}
-% This is the \textit{MRMR} algorithm introduced in \textit{Peng et al.}\cite{hanchuanpengFeatureSelectionBased2005}.
+As a pragmatic alternative, we define edge inclusion based on quantile thresholds of the synergy distribution. Specifically, we include edges whose synergy exceeds the $1-\alpha$ quantile, thereby prioritizing SNP pairs with the strongest positive epistatic signals. We set $\alpha = 0.01$ to focus on the top 1\% of interactions. While this approach does not explicitly model statistical significance, it enables interpretable and scalable exploration of variant-level interactions, and lays the foundation for future work incorporating rigorous uncertainty quantification.
+
+\subsubsection{Logistic Regression}
+\label{sec:logreg}
+After the discovery analysis, we test for the direction of effect of the prioritized SNPs. It is not enough to know which SNPs may be interacting epistatically within gene-pairs determined to show evidence of epistasis, but we ideally would like to know how these SNPs interact in relation to disease risk. Are they protective or do they increase risk for developing IA? 
+\par
+In order to test the now targeted list of SNP-pairs from the result of the discovery approach taken in this paper, we use logistic regression. While this is not the best method given the assumption of interactions being potentially nonlinear, it is a common and interpretable approach. The functional model is:
+\begin{equation}
+\text{IA} \sim \text{SNP}_1 + \text{SNP}_2 + \text{SNP}_1\times \text{SNP}_2 + \text{Sex} + \mathbb{I}(\text{membership to high risk genotype DR3/4}) + \text{Ancestry PC1}
+\end{equation}
+This model will iterate over all pairs of SNPs determined to be important from the discovery analysis and will be corrected through a Benjamini-Hochberg correction at significance level $\alpha = 0.1$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\subsection{Procedures used}
@@ -777,42 +761,263 @@ As a pragmatic alternative, we define edge inclusion based on quantile threshold
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\newpage
+% \newpage
 \section{Results}
 \label{sec:res}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsection{Overview}
 \label{sec:res-over}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+We analyzed genetic data comprising 685,455 SNPs mapped to 20,859 genes across the 22 autosomal chromosomes in 359 DAISY individuals. All 20,859 genes were successfully summarized using diffusion kPCA, as described in Section~\ref{sec:dkpc}. These gene-level summaries were then used to model intra-chromosomal gene-gene interactions and gene main effects using a Bayesian semi-parametric approach outlined in Section~\ref{sec:bim}. Results highlight candidate genes and gene-pairs that may contribute to the onset of IA in DAISY children. 
+
+\subsection{Within-Gene Epistasis and Gene Summaries}
+\label{sec:res-within}
+
+To quantify non-additive genetic effects within individual genes, we computed bivariate synergy scores for all pairwise combinations of SNPs mapped to the same gene. These scores measure the extent to which jointly knowing two SNPs reduces expected uncertainty about IA status beyond their individual effects. For each gene, the resulting synergy matrix was used to construct a Laplacian-esque Synergy matrix capturing SNP-level interaction structure, which was then summarized using diffusion kernel principal component analysis (kPCA), as described in Section~\ref{sec:dkpc}. The first diffusion PC was retained as a non-linear gene-level summary capturing within-gene epistasis.
+\par
+Across all 20,859 genes on 22 autosomal chromosomes, synergy matrices and kPCA summaries were successfully computed. Notably, genes such as \textit{DCTN4}, which participates in antigen processing and presentation via MHC class II (GO:0019886), and \textit{CDH4}, associated with cell adhesion (GO:0007155), exhibited high internal synergy and had evidence of association to IA from downstream modeling. We will use these genes to demonstrate the output from the Within-Gene Epistasis analysis.
+\par
+The top-left Synergy sub-matrix for \textit{DCTN4} in Table 2 illustrates the pairwise SNP synergies that form the foundation for the network and diffusion kernel PCA. The resulting within-gene network is pictured in Figure~\ref{fig:DCTN4}.
+
+\begin{center}
+\begin{table}
+
+\caption{Top-left 4x4 synergy sub-matrix for \textit{DCTN4}.}
+\centering
+\begin{tabular}[t]{l|r|r|r|r}
+\hline
+  & 5:150087394:C:T & 5:150087661:C:G & 5:150090164:T:G & 5:150095596:A:G\\
+\hline
+5:150087394:C:T & 0.0086152 & 0.0000871 & 0.0000423 & -0.0000171\\
+\hline
+5:150087661:C:G & 0.0000871 & 0.0392176 & -0.0061638 & -0.0055427\\
+\hline
+5:150090164:T:G & 0.0000423 & -0.0061638 & 0.0374069 & 0.0000637\\
+\hline
+5:150095596:A:G & -0.0000171 & -0.0055427 & 0.0000637 & 0.0058758\\
+\hline
+\end{tabular}
+\end{table}\end{center}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.75\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/HPC-res/within-gene-syn-res/Networks/chr5_DCTN4_network.png}
+\caption{Synergy network for SNPs in \textit{DCTN4} ordered by chromosomal position. Key SNPs include: 3 = 5:150090164:T:G, 10 = 5:150098220:T:C, 15 = 5:150118585:A:G, 20 = 5:150122604:G:A, and 24 = 5:150132160:T:C.}
+\label{fig:DCTN4}
+\end{figure}
+
+
+\subsection{Bayesian Gene-Gene Interaction Modeling}
+\label{sec:res-bim}
+
+To identify gene-gene interactions contributing to IA, we modeled associations between gene-level summaries using a Bayesian nonlinear interaction model. This approach, described in Section~\ref{sec:bim}, employs spike-and-slab priors to jointly estimate main effects and pairwise interaction effects between genes. The input to the model consists of the first diffusion kernel principal component (kPCA) from within-gene synergy matrices, providing a non-linear summary of each gene’s internal epistatic structure.
+
+\par
+This model does not currently incorporate additional covariates such as sex, age, or population structure. Rather, it follows the process from \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022} to uncover interaction effects purely from genotype-derived gene summaries. Modeling was performed intra-chromosomally to reduce the computational burden -- considering all possible pairs of genes within each chromosome rather than across all chromosomes.
+
+\par
+Posterior inclusion probabilities (PIPs) were computed for each gene and gene-pair, quantifying the probability that a given effect is associated with IA. Genes and gene pairs were prioritized separately based on their PIPs. Figure~\ref{fig:PIP-dist} shows the distributions of PIPs for main and interaction effects. For downstream analysis, we retained genes and gene pairs with PIPs above the median of their respective distributions. This thresholding strategy differs slightly from \textit{Walakira et al.}, who retained all genes with non-zero PIPs. Given the larger number of genes analyzed in our study, this filtering step helps reduce noise while retaining more relevant candidates.
+\par
+Diagnostics for model convergence were saved and are discussed further in Section~\ref{sec:limitations}. Notably, several Markov Chain Monte Carlo (MCMC) chains exhibited poor mixing, likely due to the small sample size. As a result, posterior estimates--particularly for interaction terms--should be interpreted with caution.
+
+\begin{figure}[ht]
+  \centering
+  \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{main-effect-pips.png}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{intrxn-effect-pips.png}
+  \end{minipage}
+  \caption{Posterior inclusion probabilities (PIPs) for gene-level main and interaction effects.}
+  \label{fig:PIP-dist}
+\end{figure}
+
+% \par
+% The top-ranked genes identified through main effect PIPs included \textit{DCTN4}, \textit{CDH4}, and \textit{NOD2}, all of which have been previously implicated in immune regulation and inflammatory signaling. Among the top gene pairs prioritized by interaction PIPs were \textit{PMM2/NOD2}, and \textit{CDH4/PKIG}. Interestingly, several of these pairs involved genes with modest or no marginal effect, suggesting that interaction models can reveal combinatorial effects that would be missed by marginal analyses alone. 
+
+\begin{table}[ht]
+\centering
+\caption{Top 10 Genes Ranked by Posterior Inclusion Probability (Main Effects)}
+\label{tab:top_main_genes}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Chromosome} & \textbf{Gene} & \textbf{PIP} \\
+\hline
+20 & DEFB115     & 1.0000 \\
+14 & LINC01629   & 0.9522 \\
+22 & THAP7-AS1   & 0.9492 \\
+5  & DCTN4       & 0.9475 \\
+9  & LINC01242   & 0.8498 \\
+4  & MTHFD2L     & 0.8192 \\
+10 & TUBAL3      & 0.8175 \\
+20 & STK4        & 0.7913 \\
+14 & CALM1       & 0.7888 \\
+14 & POLE2       & 0.7490 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Top 10 Gene Pairs Ranked by Posterior Inclusion Probability (Interaction Effects)}
+\label{tab:top_intrxn_pairs}
+\begin{tabular}{|r|l|l|r|}
+\hline
+\textbf{Chromosome} & \textbf{Gene 1} & \textbf{Gene 2} & \textbf{PIP} \\
+\hline
+19 & C19orf12  & FXYD5    & 0.0842 \\
+1  & S100A8    & PTGS2    & 0.0832 \\
+11 & SART1     & DSCAML1  & 0.0767 \\
+8  & LINC01605 & CYC1     & 0.0750 \\
+19 & CCDC9     & ZSCAN5B  & 0.0738 \\
+19 & PTBP1     & DHDH     & 0.0685 \\
+14 & IFI27L1   & DLK1     & 0.0677 \\
+3  & BSN       & ACAD9    & 0.0628 \\
+1  & TRIT1     & NEXN     & 0.0612 \\
+3  & PHF7      & DCP1A    & 0.0593 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Pathway Enrichment Prioritization}
+While the Bayesian model identified individual genes and gene-pairs with evidence of inclusion in the model through PIPs, these results alone do not reveal the biological context in which these loci operate. To interpret the functional relevance of these candidates, we performed gene set enrichment analysis. Specifically, we used the GENE2FUNC module within the FUMA platform\cite{watanabeFunctionalMappingAnnotation2017} to assess whether genes with PIPs above the median--separately for main and interaction effects--were enriched in curated biological pathways and functional categories.
+\par 
+The GENE2FUNC analysis applied a Benjamini–Hochberg false discovery rate (FDR) threshold of $0.01$ to identify significantly enriched gene sets. We focused our interpretation on three key annotation sources: Reactome pathways, GTEx tissue-specific expression, and immunological signatures. These categories were selected to contextualize findings in terms of immune-related function and potential tissue-specific mechanisms relevant to islet autoimmunity.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[]{gtex_v8_ts_general_FUMA_jobs607797.png}
+\caption{GTEx tissue expression results from FUMA GENE2FUNC. Tissues marked in red indicate significant enrichment of differentially expressed genes (Bonferroni-corrected $p < 0.05$).}
+\label{fig:gtex}
+\end{figure}
+
+\par
+Interestingly, we observe that the prioritized genes are significantly downregulated in pancreatic tissue (Figure~\ref{fig:gtex}). This downregulation may reflect disrupted gene expression patterns in pathways critical for maintaining normal pancreatic or islet function. This could indicate that genes which are typically active in the pancreas are underexpressed in individuals at risk for IA, potentially contributing to tissue-specific vulnerability or immune dysregulation.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[]{reactome.png}
+\caption{Top Reactome pathways enriched among genes prioritized by posterior inclusion probabilities. Bar plots show the proportion of overlapping genes and enrichment significance (adjusted $p$-value).}
+\label{fig:reactome}
+\end{figure}
+
+\par
+In addition to tissue-specific signatures, Reactome pathway analysis revealed that prioritized genes were significantly enriched in immune-related and developmental processes (Figure~\ref{fig:reactome}). Notably, the MHC Class II Antigen Presentation pathway was among the top enriched categories, reinforcing the role of antigen processing and presentation in IA pathogenesis. Other significantly enriched pathways included the adaptive immune system, infectious disease response, and developmental biology, all of which align with mechanisms previously implicated in T1D. These findings highlight functionally coherent biological modules despite being under-powered in DAISY.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[]{immuno.png}
+\caption{Top enriched immunologic signatures (MsigDB C7) among prioritized genes. Many gene sets relate to CD4\textsuperscript{+}/CD8\textsuperscript{+} T cell activation and differentiation.}
+\label{fig:immuno}
+\end{figure}
+
+\par
+We examined enrichment in the MsigDB C7 immunologic signatures, which represent gene expression changes across a wide range of immune cell types and stimulation contexts. As shown in Figure~\ref{fig:immuno}, several gene sets were significantly enriched, including those associated with $\mathrm{CD4}^{+}$ and $\mathrm{CD8}^{+}$ T cell activation (e.g., GSE40274\_CTRL\_VS\_ACTIVATED\_CD4\_TCELL\_UP) and immune suppression (GSE14308\_TH17\_VS\_INDUCED\_TREG\_DN). These findings underscore the potential involvement of genes driving interaction effects in shaping T cell-mediated immune responses, which are central to the etiology of IA. Importantly, multiple enriched signatures involved regulatory T cells (Tregs) and memory T cell subsets, further supporting the utility of this method and its ability to detect biologically relevant and disease specific pathways\cite{hullRegulatoryCellDysfunction2017,dwyerEnhancedCD4CD82021}.
+\par
+In addition, we explored trait associations through the GWAS Catalog gene set annotations. Figure~\ref{fig:metabolites} shows that genes prioritized by PIPs are significantly enriched for traits related to metabolite levels. This enrichment aligns with previous findings that early metabolic alterations are not only associated with the onset of IA and T1D, but also influence the rate of progression from IA to T1D\cite{maMetabolomicsAnalysisSerum2024,lamichhaneCirculatingMetabolicSignatures2023}. These results further support the functional relevance of the genes identified by our model in metabolic and immunologic pathways linked to disease onset.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[]{metabolites.png}
+\caption{Top GWAS catalog traits enriched among prioritized genes. Several traits, including metabolite levels and lipid-related phenotypes, show significant overlap.}
+\label{fig:metabolites}
+\end{figure}
+\par
+Despite small sample size, the model enabled prioritization of biologically plausible candidates, including genes enriched in MHC Class II antigen presentation and immune signaling pathways. Pathway enrichment analysis further demonstrated that the genes prioritized by the model were significantly enriched in Reactome, immunologic, and metabolic gene sets relevant to IA and T1D, thereby validating the biological coherence of model-derived candidates. These results highlight the discovery utility of combining diffusion-based epistasis summaries with Bayesian interaction modeling, even under limited power, and suggest that this framework may be a powerful tool for hypothesis generation in complex traits such as IA.
+
+
+\subsection{Direction of Effect via Logistic Regression}
+% While the Bayesian interaction model identified genes and gene pairs likely contributing to islet autoimmunity (IA), it is of clinical and biological interest to determine whether these associations are protective or confer increased risk. Moreover, identifying the specific SNPs within these genes that are likely driving these effects is critical for fine-mapping disease mechanisms. This analysis is relevant both for SNPs within individual genes (intra-genic interactions) and between genes (inter-genic interactions).
+% \par
+% To prioritize variants for follow-up, we restricted our analysis to genes that appeared in significantly enriched Reactome pathways identified via the GENE2FUNC enrichment analysis. This pathway-guided filtering approach enables focused evaluation of SNP-level interactions with greater biological interpretability and statistical efficiency. For each prioritized gene and gene-pair, we then evaluated the direction and strength of interaction effects using logistic regression, estimating odds ratios and confidence intervals for both main and interaction terms.
+% \par
+Genes mapping to significantly enriched Reactome pathways were subsequently prioritized for SNP-level follow-up analysis. This pathway-guided filtering strategy allowed us to focus on genes involved in well-annotated immune and regulatory processes, thereby improving the interpretability and biological relevance of downstream association testing. For each prioritized gene and gene pair, we selected the top-scoring SNP-SNP interaction based on synergy scores and evaluated the direction and magnitude of their association with IA using logistic regression described in Section~\ref{sec:logreg}. This step aimed to determine whether individual SNP combinations conferred increased risk or a protective effect with respect to IA status, providing additional interpretability to the interactions identified through the Bayesian modeling framework.
+\par
+A power analysis conducted using the \texttt{pwr} package in R indicated that, given our sample size of 359 individuals and a desired power of 80\%, we are sufficiently powered to conduct seven independent tests. To adhere to this constraint and maintain statistical rigor, we prioritized SNP-level interactions by selecting the highest synergy SNP pair from each gene identified in the Reactome pathway enrichment. This approach ensures that the SNP pairs selected for follow-up logistic regression analysis are both biologically informed and statistically justified.
+\par
+While none of the tested SNP pairs reached significance following Benjamini–Hochberg false discovery rate (FDR) correction, one SNP pair approached nominal significance at $\alpha = 0.1$. This interaction involves variants in \textit{PMM2} and \textit{NOD2}. The odds ratio of variants 16:8930473:C:A and 16:50728498:G:C with respect to IA is 5.08 (95\% CI: [0.94, 27.56]). The SNP-level epistatic architecture between these genes, along with the odds ratio from logistic regression analysis, is visualized in Figure~\ref{fig:pmm2-nod2}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.85\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/HPC-res/log-reg/PMM2_NOD2_network.png}
+\caption{Synergy network between SNPs in \textit{PMM2} and \textit{NOD2}. Node sizes represent the number of connections within the synergy network, and edge colors indicate the direction of epistatic effects. The red arrow points to the SNP pair tested in logistic regression, with an odds ratio approaching nominal significance ($\alpha = 0.1$).}
+\label{fig:pmm2-nod2}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\subsection{Plots}
-\label{sec:plots}
+% \subsection{Plots}
+% \label{sec:plots}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \subsection{Limitations}
-\label{sec:limits}
+\label{sec:limitations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsubsection{Diffusion Parameter}
+The diffusion kernel principal component analysis (kPCA) used to summarize within-gene epistasis depends on the choice of the diffusion parameter $\beta$, which governs the rate of information flow in the graph Laplacian. While we followed the strategy outlined in \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022}, averaging across a grid of $\beta$ values from 0 to 10 in 0.1 increments, it is unclear whether this range is optimal for modeling epistatic interactions in IA or SNP interaction in general. More targeted methods for selecting $\beta$ based on cross-validation or biological prior information may improve signal resolution.
 
+\subsubsection{Convergence}
+MCMC diagnostics revealed that all chains exhibited poor mixing in the Bayesian interaction model. This lack of convergence is likely attributable to the relatively small sample size ($n = 359$) and the complexity of the model space, which includes both nonlinear main and interaction terms. Although posterior inclusion probabilities (PIPs) were still obtained and used for prioritization, estimates--particularly for interaction effects--should be interpreted with caution. Full traceplots for all chromosomes can be found in Section~\ref{sec:supp}.
 
+\subsubsection{Assumption of Normality in the Response}
+The current implementation of the Bayesian interaction model assumes a continuous, approximately normal response variable. While this is a reasonable approximation in some settings, with the response being binary status of disease, this assumption is not met. Following the procedure of \textit{Walakira et al.}\cite{walakiraDetectingGeneGene2022}, who also had a binary response, we residualize the response with 7 ancestry PCs. This allowed the response to become continuous, yet still falling short of meeting the normality assumption. We instead have a bimodal distribution in the response. This mismatch introduces potential model misspecification, particularly in how effect sizes and inclusion probabilities are interpreted. A fully Bayesian logistic or probit model would be more appropriate for binary disease outcomes, but comes with substantial computational cost and additional complexity in posterior inference. Extending the model to explicitly accommodate discrete responses remains an important area for future methodological development.
+
+\subsubsection{Power}
+Despite leveraging a discovery-oriented Bayesian framework, this study remains underpowered to detect small to moderate epistatic effects, particularly in the context of complex gene-gene interactions. The sample size of 359 individuals limits the sensitivity of the hierarchical spike-and-slab prior used in the Bayesian interaction model, especially when modeling flexible, nonlinear relationships between gene-level summaries. While the model is designed to mitigate multiple testing through regularization, PIPs for gene pairs with modest effects may still be attenuated under limited sample size, potentially leading to false negatives or underestimated signals.
+
+\par
+Additionally, power constraints were more explicitly quantified for the SNP-level follow-up analysis. A power analysis using the \text{pwr} package in R indicated that, given the available sample size, only seven SNP-level interaction tests could be conducted at 80\% power. This limitation required strict prioritization of candidate SNP pairs, and may have contributed to the lack of statistically significant results after correction for multiple testing.
+
+\par
+The limited sample size presents a key constraint on both the detection and interpretation of epistatic effects. Future work will benefit from larger cohorts, which would increase statistical power, improve MCMC convergence, and support more robust modeling of subtle genetic interactions relevant to islet autoimmunity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\newpage
+% \newpage
 \section{Discussion}
 \label{sec:disc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This study presents a genome-wide, multi-stage framework for identifying epistatic interactions contributing to IA in DAISY, leveraging both information-theory and Bayesian interaction modeling. Our results highlight the promise of integrating SNP-level interaction structure with flexible gene-level modeling despite limited sample size in Genome-Wide analysis, particularly in genetically complex diseases like IA.
+\par
+We first used Synergy matrices to capture within-gene SNP interaction structure, summarizing each gene with a non-linear component from diffusion kernel principal component analysis. This approach allowed us to reduce dimensionality while summarizing SNP-level epistatic signals. Genes such as \textit{DCTN4} and \textit{CDH4}, which are involved in antigen presentation and cell adhesion, respectively, emerged as candidates with high internal synergy, supporting their potential role in IA risk.
+\par
+inclusion probabilities (PIPs). Although most interaction PIPs were modest—reflecting limited statistical power—top-ranked pairs such as \textit{PMM2/NOD2} and \textit{CDH4/PKIG} suggest novel, biologically plausible interactions. According to the UCSC Genome Browser:
+\begin{itemize}
+\item \textit{PMM2} (phosphomannomutase 2) is a key enzyme in glycosylation and is involved in the metobolic process (GO:0006013)
+\item	\textit{NOD2} (nucleotide-binding oligomerization domain-containing protein 2) activates pro-inflammatory signaling through NF-$\kappa$B pathways, with known roles in Crohn’s disease and other inflammatory conditions and is involved with cytokine production in the immune response (GO:0002367)
+\item \textit{CDH4} (cadherin 4, R-cadherin) is involved in cell adhesion (GO:0007155). 
+\item \textit{PKIG} (protein kinase inhibitor gamma) is involved in the negative regulation of proteinkinase activity (GO:0006469)
+\end{itemize}
+These gene-pairs represent potential immune-metabolic crosstalk and suggest that this modeling approach can potentially uncover previously uncharacterized mechanisms of islet autoimmunity. Full gene annotations and genomic coordinates are available via the UCSC Genome Browser\cite{perezUCSCGenomeBrowser2025}.
+\par
+To interpret the biological relevance of these findings, we applied pathway enrichment using the FUMA\cite{watanabeFunctionalMappingAnnotation2017} platform. Genes with high PIPs were significantly downregulated in the pancreas and enriched in immune-related processes, including MHC class II antigen presentation and CD4\textsuperscript{+}/CD8\textsuperscript{+} T cell activation. These findings align with the known role of autoreactive T cells and impaired antigen processing in T1D pathogenesis. Additionally, trait enrichment in metabolite-associated genes supports prior evidence that early metabolic perturbations may influence IA development\cite{lamichhaneCirculatingMetabolicSignatures2023,maMetabolomicsAnalysisSerum2024}.
+\par
+By prioritizing genes from Reactome pathways, we conducted targeted SNP-level logistic regression to estimate the direction of effect. While no pairs achieved FDR-corrected significance, the interaction between SNPs in \textit{PMM2} and \textit{NOD2} approached nominal significance with an odds ratio of 5.08. This pair lies within a broader synergy network suggestive of coordinated epistatic influence on IA status.
+\par
+This study contributes a genome-wide method for gene-gene interaction discovery using synergy matrices and hierarchical Bayesian modeling. However, several limitations warrant discussion. The diffusion parameter $\beta$ was fixed across genes, and MCMC chains exhibited poor mixing, likely due to the limited sample size. Our logistic regression power analysis indicated capacity for only seven tests at 80\% power, constraining downstream inference. Despite these challenges, the biologically relevant enrichment results provide reassurance that our approach captures meaningful signal at the gene-level.
+\par
+Future work should focus on increasing sample size, optimizing synergy parameterization, incorporating covariates into the Bayesian model, altering the response assumption of normality, and extending interaction modeling to cross-chromosome pairs. These steps will be essential to improving power, interpretability, and generalizability of epistasis detection strategies in complex disease genetics.
 
-
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[]{Reacfoam.jpg}
+% \caption{WRITE CAPTION \cite{oscanoaSNPnexusWebServer2020}}
+% \end{figure}
+% 
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[]{karyotype-of-genomic-consequences.png}
+% \caption{WRITE CAPTION \cite{oscanoaSNPnexusWebServer2020}}
+% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Conclusion}
-\label{sec:conc}
+% \newpage
+% \section{Conclusion}
+% \label{sec:conc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

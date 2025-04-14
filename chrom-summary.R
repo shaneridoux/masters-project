@@ -40,9 +40,15 @@ X <- files %>%
 anno <- fread("anno_file.tsv") 
 anno$gene[which(anno$gene == "THRA1/BTR")] <- "THRA1|BTR"
 anno <- anno %>% filter(gene %in% colnames(X)) %>%
-  select(gene,chr) %>%
+  select(gene,chr,topmed) %>%
   distinct(gene, .keep_all = TRUE) %>% 
   as.data.frame()
+
+write.table(anno, file="/Users/shane/School/CU-Denver/Masters-Project/anno_file_reduced.tsv",
+            sep = "\t",
+            col.names = TRUE,
+            row.names = FALSE,
+            quote = FALSE)
 
 pheno <- fread("/Users/shane/School/CU-Denver/Masters-Project/corrected-pheno.txt") %>%
   select(PHENO) %>%
