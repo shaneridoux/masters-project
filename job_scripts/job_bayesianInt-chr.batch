@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --partition=amilan
+#SBATCH --ntasks=10
+#SBATCH --mem=200G
+#SBATCH --job-name="chr-bayesian-int"  # used as folder name for output
+#SBATCH -o "/scratch/alpine/sridoux@xsede.org/ms-proj/BayesianInt-Res/out/chr_log_%A_%a.out"
+#SBATCH -e "/scratch/alpine/sridoux@xsede.org/ms-proj/BayesianInt-Res/err/chr_log_%A_%a.err"
+#SBATCH --account=amc-general
+#SBATCH --time=23:59:00
+#SBATCH --array=1
+
+
+module load miniforge
+mamba activate ms-proj
+
+Rscript /scratch/alpine/sridoux@xsede.org/ms-proj/chrosome-intrxn-HPC.R 
+ 
+

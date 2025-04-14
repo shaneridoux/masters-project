@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --partition=amem
+#SBATCH --qos=long
+#SBATCH --ntasks=48
+#SBATCH --mem=1000G
+#SBATCH --job-name="mem-gene-bint"  # used as folder name for output
+#SBATCH -o "/scratch/alpine/sridoux@xsede.org/ms-proj/BayesianInt-Res/out/gene-bint-log_%A_%a.out"
+#SBATCH -e "/scratch/alpine/sridoux@xsede.org/ms-proj/BayesianInt-Res/err/gene-bint-log_%A_%a.err"
+#SBATCH --account=amc-general
+#SBATCH --time=3-23:59:00
+#SBATCH --array=6,7,11,12,17
+
+
+task_id=$SLURM_ARRAY_TASK_ID  # number of current chunk launching analysis for
+
+module load miniforge
+mamba activate ms-proj
+
+Rscript /scratch/alpine/sridoux@xsede.org/ms-proj/bayesian-int-by-chrom.R \
+        "$task_id"
+

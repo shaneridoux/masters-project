@@ -43,6 +43,11 @@ Bessonov, K., E.~S. Gusareva, and K.~Van~Steen (2015, July).
 \newblock A cautionary note on the impact of protocol changes for genome-wide association {SNP}~{\texttimes}~{SNP} interaction studies: an example on ankylosing spondylitis.
 \newblock {\em Human Genetics\/}~{\em 134\/}(7), 761--773.
 
+\bibitem[\protect\citeauthoryear{Champely}{Champely}{2020}]{champelyPwrBasicFunctions2020}
+Champely, S. (2020).
+\newblock pwr: {Basic} functions for power analysis.
+\newblock manual.
+
 \bibitem[\protect\citeauthoryear{Chung}{Chung}{1997}]{chungSpectralGraphTheory1997}
 Chung, F. R.~K. (1997).
 \newblock {\em Spectral {Graph} {Theory}}.

@@ -28,13 +28,13 @@
 \contentsline {subsection}{\numberline {3.3}Bayesian Gene-Gene Interaction Modeling}{22}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Pathway Enrichment Prioritization}{24}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Direction of Effect via Logistic Regression}{28}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Limitations}{28}{subsection.3.6}%
-\contentsline {subsubsection}{\numberline {3.6.1}Diffusion Parameter}{28}{subsubsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6}Limitations}{29}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Diffusion Parameter}{29}{subsubsection.3.6.1}%
 \contentsline {subsubsection}{\numberline {3.6.2}Convergence}{29}{subsubsection.3.6.2}%
 \contentsline {subsubsection}{\numberline {3.6.3}Assumption of Normality in the Response}{30}{subsubsection.3.6.3}%
 \contentsline {subsubsection}{\numberline {3.6.4}Power}{30}{subsubsection.3.6.4}%
 \contentsline {section}{\numberline {4}Discussion}{31}{section.4}%
 \contentsline {section}{\numberline {5}References}{33}{section.5}%
-\contentsline {section}{\numberline {A}Data Preprocessing}{37}{appendix.A}%
-\contentsline {section}{\numberline {B}Code}{37}{appendix.B}%
-\contentsline {section}{\numberline {C}Additional Figures \& Tables}{37}{appendix.C}%
+\contentsline {section}{\numberline {A}Code \& Full Results}{37}{appendix.A}%
+\contentsline {section}{\numberline {B}Additional Figures \& Tables}{38}{appendix.B}%
+\contentsline {section}{\numberline {C}SNP Dictionary}{47}{appendix.C}%

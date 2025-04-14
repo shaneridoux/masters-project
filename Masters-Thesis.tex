@@ -220,13 +220,13 @@ Thank you to my family and friends for helping me find balance en route to finis
 \section*{Abstract}  % Unnumbered section
 \addcontentsline{toc}{section}{Abstract}  % Add to Table of Contents
 \par
-Type 1 Diabetes (T1D) is a complex autoimmune disease characterized by the erroneous destruction of pancreatic islet $\beta$-cells resulting in life-long dependence on exogenous insulin. Although T1D is considered to be largely genetic, with the heritability of the disease around 80\%, roughly 20\% of the phenotypic variance is still unexplained. Epistasis, the interaction of genetic variants, is thought to contribute to this missing heritability in T1D, yet the epistatic landscape of T1D and its precursor Islet Autoimmunity (IA) remains understudied. A genome-wide analysis of the epistatic architecture of IA could inform potential biological pathways in the etiology of T1D in addition to elucidating aspects of its missing heritability. 
+Type 1 Diabetes (T1D) is a complex autoimmune disease characterized by the erroneous destruction of pancreatic islet $\beta$-cells resulting in life-long dependence on exogenous insulin. Although T1D is considered to be largely genetic, with the heritability of the disease around 80\%, roughly 20\% of the phenotypic variance attributed to genetics is still unexplained. Epistasis, the interaction of genetic variants, is thought to contribute to this missing heritability in T1D, yet the epistatic landscape of T1D and its precursor Islet Autoimmunity (IA) remains understudied. A genome-wide analysis of the epistatic architecture of IA could inform potential biological pathways in the etiology of T1D in addition to elucidating aspects of its missing heritability. 
 \par
 After quality control, 359 DAISY children selected for nested case-control study with a customized Exome array imputed to the TOPMed r2 reference panel were included for analysis of genome-wide epistasis detection. Within-gene synergy networks were used to capture non-linear epistatic effects and summarized through diffusion kernel principal components (kPC). Between-gene epistasis was detected through a Bayesian interaction analysis of kPC-summarized genes.
 \par
 Posterior inclusion probabilities (PIPs) derived from the Bayesian model identified candidate genes and gene-pairs with potential involvement in IA onset. While convergence diagnostics indicated poor MCMC mixing, PIPs were still obtained for downstream prioritization. Pathway enrichment analysis of genes with high PIPs revealed strong overrepresentation in Reactome pathways related to the immune system, as well as tissue-specific downregulation in the pancreas. A power analysis constrained SNP-level follow-up testing to seven pairs, one of which--between \textit{PMM2} and \textit{NOD2}--approached nominal significance (odds ratio = 5.08; 95\% CI: [0.94, 27.56]).
 \par
-This study presents genome-wide, multi-stage framework for detecting both within- and between-gene epistasis in genomic data. While limited by small sample size, the results reveal biologically coherent signals aligned with known mechanisms of T1D and IA, including innate immunity and MHC class II antigen-presentation. The use of diffusion-based gene summaries and Bayesian variable selection enabled interpretable prioritization of candidate loci and interactions despite the high dimensionality of the data. Findings from this study warrant further investigation in larger cohorts to validate emerging epistatic signals and explore their functional relevance in the etiology of IA and T1D.
+This study presents a genome-wide, multi-stage framework for detecting both within- and between-gene epistasis in genomic data. While limited by small sample size, the results reveal biologically coherent signals aligned with known mechanisms of T1D and IA, including innate immunity and MHC class II antigen-presentation. The use of diffusion-based gene summaries and Bayesian variable selection enabled interpretable prioritization of candidate loci and interactions despite the high dimensionality of the data. Findings from this study warrant further investigation in larger cohorts to validate emerging epistatic signals and explore their functional relevance in the etiology of IA and T1D.
 
 \newpage
 \pagenumbering{arabic}
@@ -802,7 +802,7 @@ The top-left Synergy sub-matrix for \textit{DCTN4} in Table 2 illustrates the pa
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.75\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/HPC-res/within-gene-syn-res/Networks/chr5_DCTN4_network.png}
+\includegraphics[width=0.75\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/masters-project/HPC-res/within-gene-syn-res/Networks/chr5_DCTN4_network.png}
 \caption{Synergy network for SNPs in \textit{DCTN4} ordered by chromosomal position. Key SNPs include: 3 = 5:150090164:T:G, 10 = 5:150098220:T:C, 15 = 5:150118585:A:G, 20 = 5:150122604:G:A, and 24 = 5:150132160:T:C.}
 \label{fig:DCTN4}
 \end{figure}
@@ -836,8 +836,8 @@ Diagnostics for model convergence were saved and are discussed further in Sectio
   \label{fig:PIP-dist}
 \end{figure}
 
-% \par
-% The top-ranked genes identified through main effect PIPs included \textit{DCTN4}, \textit{CDH4}, and \textit{NOD2}, all of which have been previously implicated in immune regulation and inflammatory signaling. Among the top gene pairs prioritized by interaction PIPs were \textit{PMM2/NOD2}, and \textit{CDH4/PKIG}. Interestingly, several of these pairs involved genes with modest or no marginal effect, suggesting that interaction models can reveal combinatorial effects that would be missed by marginal analyses alone. 
+\par
+The full list of top-ranked genes identified in this analysis is provided in Section~\ref{sec:code}; however, the top 10 genes are shown in Table~\ref{tab:top_main_genes} and Table~\ref{tab:top_intrxn_pairs}.
 
 \begin{table}[ht]
 \centering
@@ -907,7 +907,7 @@ Interestingly, we observe that the prioritized genes are significantly downregul
 \end{figure}
 
 \par
-In addition to tissue-specific signatures, Reactome pathway analysis revealed that prioritized genes were significantly enriched in immune-related and developmental processes (Figure~\ref{fig:reactome}). Notably, the MHC Class II Antigen Presentation pathway was among the top enriched categories, reinforcing the role of antigen processing and presentation in IA pathogenesis. Other significantly enriched pathways included the adaptive immune system, infectious disease response, and developmental biology, all of which align with mechanisms previously implicated in T1D. These findings highlight functionally coherent biological modules despite being under-powered in DAISY.
+In addition to tissue-specific signatures, Reactome pathway analysis revealed that prioritized genes were significantly enriched in immune-related and developmental processes (Figure~\ref{fig:reactome}). Notably, the MHC Class II Antigen Presentation pathway was among the top enriched categories, reinforcing the role of antigen processing and presentation in IA pathogenesis. Other significantly enriched pathways included the adaptive immune system, infectious disease response, and developmental biology, all of which align with mechanisms relevant to T1D. These findings highlight functionally coherent biological modules despite being under-powered in DAISY.
 
 \begin{figure}[h!]
 \centering
@@ -936,16 +936,16 @@ Despite small sample size, the model enabled prioritization of biologically plau
 % \par
 % To prioritize variants for follow-up, we restricted our analysis to genes that appeared in significantly enriched Reactome pathways identified via the GENE2FUNC enrichment analysis. This pathway-guided filtering approach enables focused evaluation of SNP-level interactions with greater biological interpretability and statistical efficiency. For each prioritized gene and gene-pair, we then evaluated the direction and strength of interaction effects using logistic regression, estimating odds ratios and confidence intervals for both main and interaction terms.
 % \par
-Genes mapping to significantly enriched Reactome pathways were subsequently prioritized for SNP-level follow-up analysis. This pathway-guided filtering strategy allowed us to focus on genes involved in well-annotated immune and regulatory processes, thereby improving the interpretability and biological relevance of downstream association testing. For each prioritized gene and gene pair, we selected the top-scoring SNP-SNP interaction based on synergy scores and evaluated the direction and magnitude of their association with IA using logistic regression described in Section~\ref{sec:logreg}. This step aimed to determine whether individual SNP combinations conferred increased risk or a protective effect with respect to IA status, providing additional interpretability to the interactions identified through the Bayesian modeling framework.
+Genes mapping to significantly enriched Reactome pathways were subsequently prioritized for SNP-level follow-up analysis. This pathway-guided filtering strategy allowed us to focus on genes involved in well-annotated immune and regulatory processes, thereby improving the interpretability and biological relevance of downstream association testing. For each prioritized gene and gene-pair, we selected the top-scoring SNP-SNP interaction based on synergy scores and evaluated the direction and magnitude of their association with IA using logistic regression described in Section~\ref{sec:logreg}. This step aimed to determine whether individual SNP combinations conferred increased risk or a protective effect with respect to IA status, providing additional interpretability to the interactions identified through the Bayesian modeling framework.
 \par
-A power analysis conducted using the \texttt{pwr} package in R indicated that, given our sample size of 359 individuals and a desired power of 80\%, we are sufficiently powered to conduct seven independent tests. To adhere to this constraint and maintain statistical rigor, we prioritized SNP-level interactions by selecting the highest synergy SNP pair from each gene identified in the Reactome pathway enrichment. This approach ensures that the SNP pairs selected for follow-up logistic regression analysis are both biologically informed and statistically justified.
+A power analysis conducted using the \texttt{pwr}\cite{champelyPwrBasicFunctions2020} package in R indicated that, given our sample size of 359 individuals and a desired power of 80\%, we are sufficiently powered to conduct seven independent tests. To adhere to this constraint and maintain statistical rigor, we prioritized SNP-level interactions by selecting the highest synergy SNP pair from each gene identified in the Reactome pathway enrichment. This approach ensures that the SNP pairs selected for follow-up logistic regression analysis are both biologically informed and statistically justified.
 \par
 While none of the tested SNP pairs reached significance following Benjamini–Hochberg false discovery rate (FDR) correction, one SNP pair approached nominal significance at $\alpha = 0.1$. This interaction involves variants in \textit{PMM2} and \textit{NOD2}. The odds ratio of variants 16:8930473:C:A and 16:50728498:G:C with respect to IA is 5.08 (95\% CI: [0.94, 27.56]). The SNP-level epistatic architecture between these genes, along with the odds ratio from logistic regression analysis, is visualized in Figure~\ref{fig:pmm2-nod2}.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.85\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/HPC-res/log-reg/PMM2_NOD2_network.png}
-\caption{Synergy network between SNPs in \textit{PMM2} and \textit{NOD2}. Node sizes represent the number of connections within the synergy network, and edge colors indicate the direction of epistatic effects. The red arrow points to the SNP pair tested in logistic regression, with an odds ratio approaching nominal significance ($\alpha = 0.1$).}
+\includegraphics[width=0.85\textwidth]{/Users/shane/School/CU-Denver/Masters-Project/masters-project/HPC-res/log-reg/PMM2_NOD2_network.png}
+\caption{Synergy network between SNPs in \textit{PMM2} and \textit{NOD2}. Node sizes represent the number of connections within the synergy network, and edge colors indicate the direction of epistatic effects. The red arrow points to the SNP pair tested in logistic regression, with an odds ratio approaching nominal significance ($\alpha = 0.1$). The SNP dictionary mapping numbers to SNPs will be provided in Section~\ref{sec:supp_snp}.}
 \label{fig:pmm2-nod2}
 \end{figure}
 
@@ -972,7 +972,7 @@ The current implementation of the Bayesian interaction model assumes a continuou
 Despite leveraging a discovery-oriented Bayesian framework, this study remains underpowered to detect small to moderate epistatic effects, particularly in the context of complex gene-gene interactions. The sample size of 359 individuals limits the sensitivity of the hierarchical spike-and-slab prior used in the Bayesian interaction model, especially when modeling flexible, nonlinear relationships between gene-level summaries. While the model is designed to mitigate multiple testing through regularization, PIPs for gene pairs with modest effects may still be attenuated under limited sample size, potentially leading to false negatives or underestimated signals.
 
 \par
-Additionally, power constraints were more explicitly quantified for the SNP-level follow-up analysis. A power analysis using the \text{pwr} package in R indicated that, given the available sample size, only seven SNP-level interaction tests could be conducted at 80\% power. This limitation required strict prioritization of candidate SNP pairs, and may have contributed to the lack of statistically significant results after correction for multiple testing.
+Additionally, power constraints were more explicitly quantified for the SNP-level follow-up analysis. A power analysis using the \texttt{pwr}\cite{champelyPwrBasicFunctions2020} package in R indicated that, given the available sample size, only seven SNP-level interaction tests could be conducted at 80\% power. This limitation required strict prioritization of candidate SNP pairs, and may have contributed to the lack of statistically significant results after correction for multiple testing.
 
 \par
 The limited sample size presents a key constraint on both the detection and interpretation of epistatic effects. Future work will benefit from larger cohorts, which would increase statistical power, improve MCMC convergence, and support more robust modeling of subtle genetic interactions relevant to islet autoimmunity.
@@ -981,24 +981,24 @@ The limited sample size presents a key constraint on both the detection and inte
 \section{Discussion}
 \label{sec:disc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This study presents a genome-wide, multi-stage framework for identifying epistatic interactions contributing to IA in DAISY, leveraging both information-theory and Bayesian interaction modeling. Our results highlight the promise of integrating SNP-level interaction structure with flexible gene-level modeling despite limited sample size in Genome-Wide analysis, particularly in genetically complex diseases like IA.
+This study presents a genome-wide, multi-stage framework for identifying epistatic interactions contributing to Islet Autoimmunity (IA) in DAISY children, leveraging both information-theory and Bayesian interaction modeling. Many Genome-Wide Association Studies (GWAS) have been conducted in the context of Type 1 Diabetes (T1D) and through these analyses, much of the heritability has been characterized. Despite numerous GWAS, there is still a proportion of the genetic variance in IA and T1D that is missing\cite{pangMissingHeritabilityType2022}. Genome-Wide Association Interaction Studies (GWAIS) and other interactome (the entire set of interactions between DNA, RNA, proteins and metabolites within a cell\cite{walakiraDetectingGeneGene2022}) analyses offer a potential solution to this problem. Despite limited power, our results highlight the promise of integrating SNP-level interaction structure with flexible gene-level modeling in Genome-Wide analysis, particularly in genetically complex diseases like IA. 
 \par
-We first used Synergy matrices to capture within-gene SNP interaction structure, summarizing each gene with a non-linear component from diffusion kernel principal component analysis. This approach allowed us to reduce dimensionality while summarizing SNP-level epistatic signals. Genes such as \textit{DCTN4} and \textit{CDH4}, which are involved in antigen presentation and cell adhesion, respectively, emerged as candidates with high internal synergy, supporting their potential role in IA risk.
+GWAIS analyses tend to be more computationally intensive than their GWAS counterpart; this method is no different. We first used Synergy matrices to capture within-gene SNP interaction structure, summarizing each gene with a non-linear component from diffusion kernel principal component analysis. This approach allowed us to reduce dimensionality while summarizing SNP-level epistatic signals. The use of a High-Performance Computer (HPC) was necessary to conduct both within-gene epistasis summarization and between-gene epistasis detection. 
 \par
-inclusion probabilities (PIPs). Although most interaction PIPs were modest—reflecting limited statistical power—top-ranked pairs such as \textit{PMM2/NOD2} and \textit{CDH4/PKIG} suggest novel, biologically plausible interactions. According to the UCSC Genome Browser:
+Genes such as \textit{DCTN4} and \textit{CDH4}, which are involved in antigen presentation and cell adhesion, respectively, emerged as candidates with high internal synergy, supporting their potential role in IA risk. Although most interaction PIPs were modest--reflecting limited statistical power--top-ranked pairs such as \textit{PMM2/NOD2} and \textit{CDH4/PKIG} suggest novel, biologically plausible interactions. According to the UCSC Genome Browser:
 \begin{itemize}
-\item \textit{PMM2} (phosphomannomutase 2) is a key enzyme in glycosylation and is involved in the metobolic process (GO:0006013)
-\item	\textit{NOD2} (nucleotide-binding oligomerization domain-containing protein 2) activates pro-inflammatory signaling through NF-$\kappa$B pathways, with known roles in Crohn’s disease and other inflammatory conditions and is involved with cytokine production in the immune response (GO:0002367)
+\item \textit{PMM2} (phosphomannomutase 2) is a key enzyme in glycosylation and is involved in the metobolic process (GO:0006013).
+\item	\textit{NOD2} (nucleotide-binding oligomerization domain-containing protein 2) activates pro-inflammatory signaling through NF-$\kappa$B pathways, with known roles in Crohn’s disease and other inflammatory conditions and is involved with cytokine production in the immune response (GO:0002367).
 \item \textit{CDH4} (cadherin 4, R-cadherin) is involved in cell adhesion (GO:0007155). 
-\item \textit{PKIG} (protein kinase inhibitor gamma) is involved in the negative regulation of proteinkinase activity (GO:0006469)
+\item \textit{PKIG} (protein kinase inhibitor gamma) is involved in the negative regulation of proteinkinase activity (GO:0006469).
 \end{itemize}
 These gene-pairs represent potential immune-metabolic crosstalk and suggest that this modeling approach can potentially uncover previously uncharacterized mechanisms of islet autoimmunity. Full gene annotations and genomic coordinates are available via the UCSC Genome Browser\cite{perezUCSCGenomeBrowser2025}.
 \par
 To interpret the biological relevance of these findings, we applied pathway enrichment using the FUMA\cite{watanabeFunctionalMappingAnnotation2017} platform. Genes with high PIPs were significantly downregulated in the pancreas and enriched in immune-related processes, including MHC class II antigen presentation and CD4\textsuperscript{+}/CD8\textsuperscript{+} T cell activation. These findings align with the known role of autoreactive T cells and impaired antigen processing in T1D pathogenesis. Additionally, trait enrichment in metabolite-associated genes supports prior evidence that early metabolic perturbations may influence IA development\cite{lamichhaneCirculatingMetabolicSignatures2023,maMetabolomicsAnalysisSerum2024}.
 \par
-By prioritizing genes from Reactome pathways, we conducted targeted SNP-level logistic regression to estimate the direction of effect. While no pairs achieved FDR-corrected significance, the interaction between SNPs in \textit{PMM2} and \textit{NOD2} approached nominal significance with an odds ratio of 5.08. This pair lies within a broader synergy network suggestive of coordinated epistatic influence on IA status.
+We extended the framework proposed in \textit{Walakira et al.} \cite{walakiraDetectingGeneGene2022} by incorporating pathway enrichment to refine candidate gene selection for SNP-level interrogation. Using Reactome-informed filtering, we identified the top synergy SNP pair within each prioritized gene or gene-pair and performed logistic regression to assess directionality of effect. While no pairs survived FDR correction, the interaction between variants in \textit{PMM2} and \textit{NOD2} approached nominal significance (odds ratio = 5.08, 95\% CI: [0.94, 27.56]).
 \par
-This study contributes a genome-wide method for gene-gene interaction discovery using synergy matrices and hierarchical Bayesian modeling. However, several limitations warrant discussion. The diffusion parameter $\beta$ was fixed across genes, and MCMC chains exhibited poor mixing, likely due to the limited sample size. Our logistic regression power analysis indicated capacity for only seven tests at 80\% power, constraining downstream inference. Despite these challenges, the biologically relevant enrichment results provide reassurance that our approach captures meaningful signal at the gene-level.
+Several limitations merit discussion. The diffusion parameter $\beta$ was fixed across genes, and MCMC chains exhibited poor mixing, likely due to the limited sample size. Our logistic regression power analysis indicated capacity for only seven tests at 80\% power, constraining downstream inference. Despite these challenges, the biologically relevant enrichment results provide reassurance that this approach captures meaningful signal at the gene-level.
 \par
 Future work should focus on increasing sample size, optimizing synergy parameterization, incorporating covariates into the Bayesian model, altering the response assumption of normality, and extending interaction modeling to cross-chromosome pairs. These steps will be essential to improving power, interpretability, and generalizability of epistasis detection strategies in complex disease genetics.
 
@@ -1033,14 +1033,299 @@ Future work should focus on increasing sample size, optimizing synergy parameter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{Data Preprocessing}
-\label{sec:data-pre}
+% \section{Data Preprocessing}
+% \label{sec:data-pre}
+% 
 
-\section{Code}
+\section{Code \& Full Results}
 \label{sec:code}
+
+The full gene-level and interaction-level results, including all posterior inclusion probabilities (PIPs), along with all code used for data processing, modeling, and figure generation is publicly available at the following GitHub repository:
+
+\begin{center}
+\url{https://github.com/shaneridoux/masters-project}
+\end{center}
+
+The repository includes R scripts for synergy matrix construction, diffusion kernel PCA, Bayesian interaction modeling, pathway enrichment analysis, and logistic regression.
 
 \section{Additional Figures \& Tables}
 \label{sec:supp}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr1.png}
+\caption{Traceplot for Chromosome 1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr2.png}
+\caption{Traceplot for Chromosome 2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr3.png}
+\caption{Traceplot for Chromosome 3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr4.png}
+\caption{Traceplot for Chromosome 4}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr5.png}
+\caption{Traceplot for Chromosome 5}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr6.png}
+\caption{Traceplot for Chromosome 6}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr7.png}
+\caption{Traceplot for Chromosome 7}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr8.png}
+\caption{Traceplot for Chromosome 8}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr9.png}
+\caption{Traceplot for Chromosome 9}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr10.png}
+\caption{Traceplot for Chromosome 10}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr11.png}
+\caption{Traceplot for Chromosome 11}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr12.png}
+\caption{Traceplot for Chromosome 12}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr13.png}
+\caption{Traceplot for Chromosome 13}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr14.png}
+\caption{Traceplot for Chromosome 14}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr15.png}
+\caption{Traceplot for Chromosome 15}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr16.png}
+\caption{Traceplot for Chromosome 16}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr17.png}
+\caption{Traceplot for Chromosome 17}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr18.png}
+\caption{Traceplot for Chromosome 18}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr19.png}
+\caption{Traceplot for Chromosome 19}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr20.png}
+\caption{Traceplot for Chromosome 20}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr21.png}
+\caption{Traceplot for Chromosome 21}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{diagnostics/traceplot_chr22.png}
+\caption{Traceplot for Chromosome 22}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Gelman–Rubin PSRF and Effective Sample Size (ESS) for nonlinear coefficients by chromosome.}
+\label{tab:convergence}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Chromosome} & \textbf{PSRF} & \textbf{ESS} \\
+\hline
+1  & 1.187 & 15.93 \\
+2  & 1.209 & 15.78 \\
+3  & 1.664 & 15.21 \\
+4  & 1.049 & 6.73 \\
+5  & 1.072 & 12.04 \\
+6  & 1.128 & 12.24 \\
+7  & 1.278 & 17.45 \\
+8  & 1.396 & 14.97 \\
+9  & 1.131 & 13.92 \\
+10 & 1.428 & 15.60 \\
+11 & 1.044 & 16.19 \\
+12 & 1.044 & 21.06 \\
+13 & 1.640 & 18.25 \\
+14 & 1.181 & 13.27 \\
+15 & 1.064 & 9.49 \\
+16 & 1.010 & 8.58 \\
+17 & 1.056 & 14.35 \\
+18 & 1.168 & 24.61 \\
+19 & 1.056 & 11.50 \\
+20 & 1.138 & 17.92 \\
+21 & 1.032 & 14.77 \\
+22 & 2.022 & 20.60 \\
+\hline
+\end{tabular}
+\end{table}
+
+Most chromosomes exhibited PSRF values between 1.01 and 1.6, indicating modest convergence issues. Chromosome 22 had the highest PSRF (2.02), suggesting particularly poor mixing in that chain. The ESS values all reflect low effective sampling. These diagnostics support the convergence concerns raised in Section~\ref{sec:limitations}.
+
+\section{SNP Dictionary}
+\label{sec:supp_snp}
+
+\begin{table}[h!]
+\centering
+\caption{SNP Renaming Table (1 of 4)}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Original} & \textbf{Renamed} \\
+\hline
+16:8894032:A:G  & 1  \\
+16:8896094:G:A  & 2  \\
+16:8897374:C:T  & 3  \\
+16:8898879:T:G  & 4  \\
+16:8899358:A:C  & 5  \\
+16:8899619:G:A  & 6  \\
+16:8900241:G:A  & 7  \\
+16:8901081:A:C  & 8  \\
+16:8904321:G:A  & 9  \\
+16:8904591:G:A  & 10 \\
+16:8906302:G:C  & 11 \\
+16:8906914:A:C  & 12 \\
+16:8908811:G:A  & 13 \\
+16:8911364:A:G  & 14 \\
+16:8911740:A:G  & 15 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{SNP Renaming Table (2 of 4)}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Original} & \textbf{Renamed} \\
+\hline
+16:8912593:T:C  & 16 \\
+16:8914827:G:C  & 17 \\
+16:8915606:T:G  & 18 \\
+16:8921473:G:C  & 19 \\
+16:8922401:G:C  & 20 \\
+16:8922809:T:C  & 21 \\
+16:8923268:G:A  & 22 \\
+16:8924082:G:A  & 23 \\
+16:8925696:G:A  & 24 \\
+16:8926366:C:T  & 25 \\
+16:8926598:C:T  & 26 \\
+16:8926603:A:C  & 27 \\
+16:8926607:G:A  & 28 \\
+16:8926621:G:C  & 29 \\
+16:8927124:A:T  & 30 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{SNP Renaming Table (3 of 4)}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Original} & \textbf{Renamed} \\
+\hline
+16:8927885:A:G  & 31 \\
+16:8929837:G:A  & 32 \\
+16:8929902:A:T  & 33 \\
+16:8930473:C:A  & 34 \\
+16:8931241:T:A  & 35 \\
+16:8932933:T:C  & 36 \\
+16:8935051:T:G  & 37 \\
+16:8936041:A:C  & 38 \\
+16:8936674:C:A  & 39 \\
+16:8936974:A:G  & 40 \\
+16:8938168:G:A  & 41 \\
+16:8939161:C:T  & 42 \\
+16:8940381:G:A  & 43 \\
+16:50726760:T:G & 44 \\
+16:50727637:C:T & 45 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{SNP Renaming Table (4 of 4)}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Original} & \textbf{Renamed} \\
+\hline
+16:50728018:C:T & 46 \\
+16:50728413:C:T & 47 \\
+16:50728498:G:C & 48 \\
+16:50730865:T:C & 49 \\
+16:50737619:G:A & 50 \\
+16:50744098:C:T & 51 \\
+16:50746814:C:T & 52 \\
+16:50756540:G:C & 53 \\
+16:50757276:G:A & 54 \\
+16:50758838:T:C & 55 \\
+16:50759731:T:A & 56 \\
+16:50760466:C:T & 57 \\
+16:50761088:A:T & 58 \\
+16:50761666:C:T & 59 \\
+16:50762771:T:C & 60 \\
+\hline
+\end{tabular}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

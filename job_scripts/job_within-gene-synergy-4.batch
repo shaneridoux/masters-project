@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --partition=amilan
+#SBATCH --ntasks=64
+#SBATCH --mem=200G
+#SBATCH --job-name="within-gene-synergy"  # used as folder name for output
+#SBATCH -o "/scratch/alpine/sridoux@xsede.org/ms-proj/within-gene-syn-res/out/Batch-4-log_%A_%a.out"
+#SBATCH -e "/scratch/alpine/sridoux@xsede.org/ms-proj/within-gene-syn-res/err/Batch-4-log_%A_%a.err"
+#SBATCH --account=amc-general
+#SBATCH --time=23:59:00
+#SBATCH --array=1-2
+
+
+chunk_size=5000  # size of each chunk in number genes
+chunk_num=$SLURM_ARRAY_TASK_ID  # number of current chunk launching analysis for
+
+module load miniforge
+mamba activate ms-proj
+
+Rscript /scratch/alpine/sridoux@xsede.org/ms-proj/Laplacian-construction-HPC.R \
+        "$chunk_size" "$chunk_num"
+

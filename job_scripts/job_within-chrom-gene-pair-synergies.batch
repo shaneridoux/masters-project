@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --partition=amilan
+#SBATCH --ntasks=30
+#SBATCH --mem=200G
+#SBATCH --job-name="syn"  # used as folder name for output
+#SBATCH -o "/scratch/alpine/sridoux@xsede.org/ms-proj/within-gene-syn-res/out/syn-log_%A_%a.out"
+#SBATCH -e "/scratch/alpine/sridoux@xsede.org/ms-proj/within-gene-syn-res/err/syn-log_%A_%a.err"
+#SBATCH --account=amc-general
+#SBATCH --time=11:59:00
+#SBATCH --array=1-22
+
+
+chr=$SLURM_ARRAY_TASK_ID  # number of current chunk launching analysis for
+
+module load miniforge
+mamba activate ms-proj
+
+Rscript /scratch/alpine/sridoux@xsede.org/ms-proj/within-chrom-gene-pair-synergies-HPC.R \
+        "$chr"
+
